@@ -1,0 +1,10 @@
+export const BACK_COLOR = '#f6f6f6';
+export const LIGHT_GREY = '#C1C1C1';
+export const DARK_GREY = '#3c4045';
+export const BORDER_COLOR = '#D3D3D3';
+export const MIDDLE_GREY = '#979797';
+export const MAIN_COLOR = '#7EB5DF';
+export const TEXTINPUTFORM_COLOR = '#e2eaf4ff';
+export const COMMENTFORM_COLOR = '#E8F0F9';
+export const LOADING_COLOR = '#E38E49';
+export const NAVY_COLOR = '#0A3981';

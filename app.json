@@ -1,0 +1,6 @@
+{
+  "name": "TestAppD",
+  "displayName": "TestAppD",
+  "usesCleartextTraffic": true,
+  "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"]
+}
