@@ -5,13 +5,13 @@ import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '~/navigationTypes';
 import {useFetchMateDiaryList} from '~/api/mate/mate';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
-import PageFrame from '~/components/PageFrame';
 import WithBackFrame from '~/components/WithBackFrame';
 import BodyFrame from '~/components/BodyFrame';
 import {SoloDiaryInfoType} from '~/features/solo-note/util/soloDiaryType';
 import EvalInfo from '~/features/solo-note/component/EvalInfo';
 import InfoMessageView from '~/components/InfoMessageView';
 import SoloNote from '~/components/SoloNote';
+import PageFrame from '~/components/PageFrame';
 
 type MateDiaryListProp = RouteProp<RootStackParamList, 'MateDiaryList'>;
 

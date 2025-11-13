@@ -28,7 +28,6 @@ import {
   GatheringDiaryUReqType,
 } from '~/features/together/util/gatheringDiaryType';
 import {changeDateTimeFormat} from '~/components/util/date';
-import PageFrame from '~/components/PageFrame';
 import WithBackFrame from '~/components/WithBackFrame';
 import {AddMyExhButtonIcon} from '~/components/icon';
 import CustomTouchable from '~/components/CustomTouchable';
@@ -46,6 +45,7 @@ import {
   TEXTINPUTFORM_COLOR,
 } from '~/components/util/colors';
 import {FONT_NAME} from '~/components/util/style';
+import PageFrame from '~/components/PageFrame';
 
 type GatheringDiaryProp = RouteProp<RootStackParamList, 'GatheringDiary'>;
 

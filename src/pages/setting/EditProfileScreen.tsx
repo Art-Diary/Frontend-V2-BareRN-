@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import React, {useEffect, useState} from 'react';
 import {KeyboardAvoidingView, Platform, View} from 'react-native';
 import styled from 'styled-components/native';

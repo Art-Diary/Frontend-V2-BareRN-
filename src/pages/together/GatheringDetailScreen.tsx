@@ -4,7 +4,6 @@ import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '~/navigationTypes';
 import {useFetchGatheringDetailInfo} from '~/api/gathering/gathering';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
-import PageFrame from '~/components/PageFrame';
 import LoadingModal from '~/components/modal/LoadingModal';
 import WithBackFrame from '~/components/WithBackFrame';
 import GatheringMemberList from '~/features/together/components/GatheringMemberList';
@@ -12,6 +11,7 @@ import GatheringVisitExhList from '~/features/together/components/GatheringVisit
 import {DASH_WIDTH} from '~/components/util/style';
 import responsive from '~/components/util/responsiveSize';
 import {LIGHT_GREY} from '~/components/util/colors';
+import PageFrame from '~/components/PageFrame';
 
 type GatheringDetailProp = RouteProp<RootStackParamList, 'GatheringDetail'>;
 

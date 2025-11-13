@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {useUpdateSoloDiary} from '~/api/solo-note/soloDiary';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import {checkBlankInKeyword} from '~/components/util/checkKeyword';
@@ -78,7 +78,7 @@ const UpdateSoloDiaryScreen: React.FC<Props> = ({route}) => {
         />
         <ButtonView>
           <CustomTouchable onPress={onPress}>
-            <NextButton moveNext={true}>{'완료 ->'}</NextButton>
+            <NextButton>{'완료 ->'}</NextButton>
           </CustomTouchable>
         </ButtonView>
       </BodyFrame>

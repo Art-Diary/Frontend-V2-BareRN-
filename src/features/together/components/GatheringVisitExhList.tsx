@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components/native';
 import {FlatList} from 'react-native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {GatheringVisitExhInfoType} from '../util/gatheringInfoType';
 import CustomTouchable from '~/components/CustomTouchable';
 import {AddMyExhButtonIcon} from '~/components/icon';

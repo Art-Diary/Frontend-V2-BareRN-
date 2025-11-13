@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {FlatList, Pressable} from 'react-native';
 import {RootStackParamList} from '~/navigationTypes';
 import {useWriteDiaryActions} from '~/zustand/soloDiary';

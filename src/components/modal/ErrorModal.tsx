@@ -9,7 +9,7 @@ import {
   FONT_NAME,
 } from '../util/style';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import CustomTouchable from '../CustomTouchable';
 import responsive from '../util/responsiveSize';
 

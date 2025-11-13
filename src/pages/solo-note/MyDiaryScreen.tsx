@@ -5,7 +5,6 @@ import {RootStackNavigationProp} from '~/App';
 import {useFetchSoloDiaryList} from '~/api/solo-note/soloDiary';
 import BodyFrame from '~/components/BodyFrame';
 import InfoMessageView from '~/components/InfoMessageView';
-import PageFrame from '~/components/PageFrame';
 import SoloNote from '~/components/SoloNote';
 import WithBackFrame from '~/components/WithBackFrame';
 import CustomTouchable from '~/components/CustomTouchable';
@@ -19,6 +18,7 @@ import EvalInfo from '~/features/solo-note/component/EvalInfo';
 import {SoloDiaryInfoType} from '~/features/solo-note/util/soloDiaryType';
 import {RootStackParamList} from '~/navigationTypes';
 import {useWriteDiaryActions} from '~/zustand/soloDiary';
+import PageFrame from '~/components/PageFrame';
 
 type MyDiaryScreenProp = RouteProp<RootStackParamList, 'MyDiary'>;
 

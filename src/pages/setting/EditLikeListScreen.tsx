@@ -1,5 +1,5 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';

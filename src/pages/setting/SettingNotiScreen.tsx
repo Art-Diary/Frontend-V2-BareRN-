@@ -1,7 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
-import PageFrame from '~/components/PageFrame';
 import WithBackFrame from '~/components/WithBackFrame';
 import {DARK_GREY, LIGHT_GREY} from '~/components/util/colors';
 import responsive from '~/components/util/responsiveSize';
@@ -9,6 +8,7 @@ import {FONT_NAME} from '~/components/util/style';
 import UpdateNoti from '~/features/setting/components/UpdateNoti';
 import {NotiInfoType} from '~/features/setting/util/notiType';
 import {useUserInfo} from '~/zustand/userInfo';
+import PageFrame from '~/components/PageFrame';
 
 const SettingNotiScreen = () => {
   const {notiList} = useUserInfo();

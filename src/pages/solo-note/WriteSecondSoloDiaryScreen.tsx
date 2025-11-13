@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
 import {
   useWriteDiaryActions,
   useWriteSecondDiaryInfo,
@@ -21,6 +20,7 @@ import {
 } from '~/components/util/style';
 import {DARK_GREY} from '~/components/util/colors';
 import {RootStackParamList} from '~/navigationTypes';
+import {RootStackNavigationProp} from '~/App';
 
 type WriteNewSoloDiaryProp = RouteProp<
   RootStackParamList,
@@ -82,7 +82,7 @@ const WriteSecondSoloDiaryScreen: React.FC<Props> = ({route}) => {
         />
         <ButtonView>
           <CustomTouchable onPress={onPress}>
-            <NextButton moveNext={true}>{'다음 ->'}</NextButton>
+            <NextButton>{'다음 ->'}</NextButton>
           </CustomTouchable>
         </ButtonView>
       </BodyFrame>
