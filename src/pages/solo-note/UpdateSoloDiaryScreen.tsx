@@ -75,6 +75,10 @@ const UpdateSoloDiaryScreen: React.FC<Props> = ({route}) => {
           isPublic={isPublic}
           setIsPublic={setIsPublic}
           soloDiary={soloDiary}
+          questionData={{
+            questionId: soloDiary.questionId,
+            questionText: soloDiary.question,
+          }}
         />
         <ButtonView>
           <CustomTouchable onPress={onPress}>
