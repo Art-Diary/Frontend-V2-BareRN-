@@ -5,7 +5,7 @@ import {findGatherColor} from './calendarColor';
 import AddVisitDateFromCalModal from './modal/AddVisitDateFromCalModal';
 import {ExhInfo, ExhInfoListOfDayType} from '../util/visitedExhInfoType';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {GatheringColorInfo} from '~/components/util/calendarUtil';
 import CustomTouchable from '~/components/CustomTouchable';
 import responsive from '~/components/util/responsiveSize';

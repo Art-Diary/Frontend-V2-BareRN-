@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {EvalInfoForExh, SoloDiaryListForExh} from '../util/exhibitionType';
 import {Pressable} from 'react-native';
 import {SoloDiaryInfoType} from '~/features/solo-note/util/soloDiaryType';

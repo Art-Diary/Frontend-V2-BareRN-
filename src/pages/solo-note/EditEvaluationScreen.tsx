@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {useUpdateEvalChoice} from '~/api/solo-note/evaluation';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import {

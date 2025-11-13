@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {useFetchCalendar} from '~/api/calendar/calendar';
 import {useFetchGatheringList} from '~/api/gathering/gathering';
-import PageFrame from '~/components/PageFrame';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import LoadingModal from '~/components/modal/LoadingModal';
 import {
@@ -16,6 +15,7 @@ import {DASH_WIDTH} from '~/components/util/style';
 import CalendarGatheringSelector from '~/features/calendar/components/CalendarGatheringSelector';
 import ExhListOfDayInCalendar from '~/features/calendar/components/ExhListOfDayInCalendar';
 import {settingGatherColor} from '~/features/calendar/util/settingGatherColor';
+import PageFrame from '~/components/PageFrame';
 
 const CalendarScreen = () => {
   // 사용자가 선택한 날짜

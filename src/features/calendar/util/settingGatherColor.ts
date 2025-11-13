@@ -1,6 +1,6 @@
-import {GatheringColorInfo} from '@/components/util/calendarUtil';
+import {GatheringColorInfo} from '~/components/util/calendarUtil';
 import {calendarColor} from '../components/calendarColor';
-import {GatheringInfoType} from '@/features/together/util/gatheringInfoType';
+import {GatheringInfoType} from '~/features/together/util/gatheringInfoType';
 
 export const settingGatherColor = (gatheringList: GatheringInfoType[]) => {
   var list: GatheringColorInfo[] = [];

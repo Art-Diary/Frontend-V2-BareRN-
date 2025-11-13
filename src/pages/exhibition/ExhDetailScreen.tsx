@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {BackHandler, Linking} from 'react-native';
 import {RootStackParamList} from '~/navigationTypes';
 import {useFetchExhibitionDetailInfo} from '~/api/exhibition/exhibitionInfo';

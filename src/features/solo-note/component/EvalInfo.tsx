@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {EvalInfoType} from '../util/soloDiaryType';

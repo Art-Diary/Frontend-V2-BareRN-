@@ -3,7 +3,7 @@ import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BackHandler} from 'react-native';
 import styled from 'styled-components/native';
 import CustomTouchable from './CustomTouchable';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {BackButtonIcon} from './icon';
 import responsive from './util/responsiveSize';
 import {BORDER_COLOR, DARK_GREY} from './util/colors';

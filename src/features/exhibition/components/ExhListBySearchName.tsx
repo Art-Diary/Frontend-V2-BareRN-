@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {useFetchExhListBySearch} from '~/api/exhibition/exhibitionInfo';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import LoadingModal from '~/components/modal/LoadingModal';

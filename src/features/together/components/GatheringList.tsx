@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {FlatList} from 'react-native';
 import {GatheringInfoType} from '../util/gatheringInfoType';
 import CreateGatheringModal from './modal/CreateGatheringModal';

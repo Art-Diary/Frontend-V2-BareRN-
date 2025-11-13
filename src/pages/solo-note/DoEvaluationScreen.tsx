@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {useWriteDiaryActions} from '~/zustand/soloDiary';
 import {showToast} from '~/components/util/showToast';
 import {SelectedEvalChoiceType} from '~/features/solo-note/util/soloDiaryType';
@@ -84,7 +84,7 @@ const DoEvaluationScreen: React.FC<Props> = ({route}) => {
 
         <ButtonView>
           <CustomTouchable onPress={onPress}>
-            <NextButton moveNext={true}>{'다음 ->'}</NextButton>
+            <NextButton>{'다음 ->'}</NextButton>
           </CustomTouchable>
         </ButtonView>
       </BodyFrame>

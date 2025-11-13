@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Header from '~/components/Header';
-import PageFrame from '~/components/PageFrame';
 import {LIGHT_GREY} from '~/components/util/colors';
 import responsive from '~/components/util/responsiveSize';
 import {DASH_WIDTH} from '~/components/util/style';
 import GatheringList from '~/features/together/components/GatheringList';
 import MateList from '~/features/together/components/MateList';
+import PageFrame from '~/components/PageFrame';
 
 const MateMainScreen = () => {
   return (

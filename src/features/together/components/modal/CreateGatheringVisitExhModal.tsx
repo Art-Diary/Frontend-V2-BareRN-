@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {ExhInfo} from '~/features/calendar/util/visitedExhInfoType';
 import {
   useCreateGatheringVisitExh,

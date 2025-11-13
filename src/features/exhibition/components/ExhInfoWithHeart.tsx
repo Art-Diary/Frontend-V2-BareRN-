@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import ExhItemView from '../../../components/ExhItemView';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {useNavigation} from '@react-navigation/native';
 import {ExhInfo} from '~/features/calendar/util/visitedExhInfoType';
 import {useCreateLikeExh, useDeleteLikeExh} from '~/api/exhibition/likeExh';

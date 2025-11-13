@@ -77,7 +77,7 @@ const CreateGatheringMemberModal: React.FC<Props> = ({
     <InfoModal handleCloseModal={handleCloseModal}>
       <LoadingModal isLoading={isPending} />
       <AreaView>
-        <Message>모임 메이트 선택</Message>
+        <Message greyColor={false}>모임 메이트 선택</Message>
         <Message greyColor={true}>(내 전시 메이트만 가능)</Message>
       </AreaView>
       <Contents>

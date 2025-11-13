@@ -2,7 +2,7 @@ import {RouteProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components/native';
 import {FlatList} from 'react-native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {RootStackParamList} from '~/navigationTypes';
 import {useFetchMateExhList} from '~/api/mate/mate';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';

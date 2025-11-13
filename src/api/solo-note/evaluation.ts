@@ -6,7 +6,7 @@ import {soloDiaryKeys} from './soloDiary';
 
 const fetchEvaluationInfo = async () => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(`${process.env.API_URL}/evaluation`, {
+  const res = await axios.get(`${process.env.API_URL}/evaluations`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

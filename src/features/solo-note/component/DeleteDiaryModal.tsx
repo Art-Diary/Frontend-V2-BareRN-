@@ -62,7 +62,7 @@ const DeleteDiaryModal: React.FC<DeleteDiaryModalProps> = ({
         <ButtonSection>
           <ButtonDetailSection>
             <CustomTouchable onPress={handleCloseModal}>
-              <DeleteButton>닫기</DeleteButton>
+              <DeleteButton isMain={false}>닫기</DeleteButton>
             </CustomTouchable>
           </ButtonDetailSection>
           <ButtonDetailSection>
@@ -119,7 +119,7 @@ const ButtonDetailSection = styled.View`
 `;
 
 interface ButtonTextProps {
-  isMain: string;
+  isMain: boolean;
 }
 
 const DeleteButton = styled.Text`

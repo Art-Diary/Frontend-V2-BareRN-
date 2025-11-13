@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 import {
   useWriteDiaryActions,
   useWriteFirstDiaryInfo,
@@ -9,7 +9,7 @@ import {
 import {changeDateTimeFormat} from '~/components/util/date';
 import {checkBlankInKeyword} from '~/components/util/checkKeyword';
 import {showToast} from '~/components/util/showToast';
-import PageFrame from '~/components/PageFrame';
+// import PageFrame from '~/components/PageFrame';
 import WithBackFrame from '~/components/WithBackFrame';
 import BodyFrame from '~/components/BodyFrame';
 import WriteSoloDiary from '~/features/solo-note/component/WriteSoloDiary';
@@ -21,6 +21,7 @@ import {
 } from '~/components/util/style';
 import {DARK_GREY} from '~/components/util/colors';
 import {RootStackParamList} from '~/navigationTypes';
+import PageFrame from '~/components/PageFrame';
 
 type WriteNewSoloDiaryProp = RouteProp<
   RootStackParamList,
@@ -82,7 +83,7 @@ const WriteFirstSoloDiaryScreen: React.FC<Props> = ({route}) => {
         />
         <ButtonView>
           <CustomTouchable onPress={onPress}>
-            <NextButton moveNext={true}>{'다음 ->'}</NextButton>
+            <NextButton>{'다음 ->'}</NextButton>
           </CustomTouchable>
         </ButtonView>
       </BodyFrame>
