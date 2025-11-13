@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import {Alert, Linking} from 'react-native';
 // import VersionCheck from 'react-native-version-check';
-import {RootStackNavigationProp} from 'App';
+import {RootStackNavigationProp} from '~/App';
 // import messaging from '@react-native-firebase/messaging';
 import {getApp, initializeApp} from '@react-native-firebase/app';
 import {
@@ -29,12 +29,14 @@ import {handleKakaoLogin} from '~/features/login/util/kakaoLogin';
 import messaging from '@react-native-firebase/messaging';
 import EmailDuplicateModal from '~/features/login/components/EmailDuplicateModal';
 import {LoginUserType} from '~/features/login/util/loginType';
+import {useFetchQuestionList} from '~/api/question/question';
+import {useQuestionActions} from '~/zustand/questionInfo';
 
 /**
  * 1. [TODO] 알림 허용 여부 받기
  * 2. 로그인하기
- * 3. 로그인 성공하면 평가항목과 질문 리스트 가져와서 zustand에 저장
- * 4. 로그인 유지
+ * 3. 로그인 유지
+ * 4. 처음 로그인 시 바로 로그인이 안되는 문제
   // TODO [AxiosError: Network Error]
 [TODO] 버전 확인
  */
@@ -54,8 +56,13 @@ const LoginScreen = () => {
     isLoading,
     isError,
   } = useFetchEvaluationInfo(state);
-  // [TODO] 질문도 가져와서 zustand에 넣어놓기
+  const {
+    data: questionInfo,
+    isLoading: isQuestionLoading,
+    isError: isQuestionError,
+  } = useFetchQuestionList(state);
   const {updateEvaluationInfo} = useEvaluationActions();
+  const {updateQuestionInfo} = useQuestionActions();
   const {updateUserInfo} = useUserActions();
   // const {updateEmail, updateProviderType, updateProviderId} = useUserLoginActions();
   // Hooks
@@ -81,12 +88,18 @@ const LoginScreen = () => {
   } = useUpdateFcmToken();
 
   useEffect(() => {
-    // [TODO] 질문도 가져와서 zustand에 넣어놓기
-    if (evaluationInfo && evaluationInfo.length > 0) {
+    if (
+      evaluationInfo &&
+      evaluationInfo.length > 0 &&
+      questionInfo &&
+      questionInfo.length > 0
+    ) {
       updateEvaluationInfo(evaluationInfo);
+      updateQuestionInfo(questionInfo);
+      setIsLoadingOpen(false);
       navigation.navigate('Main', {screen: 'Diary'});
     }
-  }, [evaluationInfo]);
+  }, [evaluationInfo, questionInfo]);
 
   useEffect(() => {
     if (isSuccessLogin) {
@@ -98,7 +111,6 @@ const LoginScreen = () => {
         setState(true);
       };
       settingUserInfo();
-      setIsLoadingOpen(false);
     }
     if (isLoginError) {
       const errorMsg = error.message;
@@ -175,7 +187,10 @@ const LoginScreen = () => {
   };
 
   useEffect(() => {
+    // on loading
+    setIsLoadingOpen(true);
     handleCheckLogin();
+    setIsLoadingOpen(false);
   }, []);
 
   // // TODO 삭제

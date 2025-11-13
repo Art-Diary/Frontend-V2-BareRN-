@@ -28,6 +28,11 @@ import {
 } from '~/components/util/style';
 import {DARK_GREY} from '~/components/util/colors';
 import {RootStackNavigationProp} from '~/App';
+import {useQuestionInfo} from '~/zustand/questionInfo';
+import {
+  QuestionType,
+  randomQuestion,
+} from '~/features/solo-note/util/randomQuestion';
 
 type WriteNewSoloDiaryProp = RouteProp<
   RootStackParamList,
@@ -43,14 +48,19 @@ const WriteThirdSoloDiaryScreen: React.FC<Props> = ({route}) => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const initEval = useWriteInitEval();
   const evaluationInfo = useWriteEvaluationInfo();
+  const thirdDiaryInfo = useWriteThirdDiaryInfo(); // main
   const firstDiaryInfo = useWriteFirstDiaryInfo();
   const secondDiaryInfo = useWriteSecondDiaryInfo();
-  const thirdDiaryInfo = useWriteThirdDiaryInfo();
+  const questionInfo = useQuestionInfo();
   const {updateThirdDiaryInfo} = useWriteDiaryActions();
   const [answerKeyword, setAnswerKeyword] = useState<string>(
     thirdDiaryInfo.answer,
   );
   const [isPublic, setIsPublic] = useState<boolean>(thirdDiaryInfo.isPublic);
+  const [questionData, setQuestionData] = useState<QuestionType>({
+    questionId: -1,
+    questionText: '',
+  });
 
   const {
     mutate: createSoloDiary,
@@ -81,8 +91,8 @@ const WriteThirdSoloDiaryScreen: React.FC<Props> = ({route}) => {
         firstDiaryInfo,
         secondDiaryInfo,
         {
-          questionId: 1,
-          question: '질문',
+          questionId: questionData.questionId,
+          question: questionData.questionText,
           answer: answerKeyword,
           writeDate: changeDateTimeFormat(new Date()),
           isPublic: isPublic,
@@ -91,10 +101,25 @@ const WriteThirdSoloDiaryScreen: React.FC<Props> = ({route}) => {
     });
   };
 
+  useEffect(() => {
+    if (thirdDiaryInfo.question === '') {
+      const randomInfo = randomQuestion(
+        [firstDiaryInfo.question, secondDiaryInfo.question],
+        questionInfo,
+      );
+      setQuestionData(randomInfo);
+    } else {
+      setQuestionData({
+        questionId: thirdDiaryInfo.questionId,
+        questionText: thirdDiaryInfo.question,
+      });
+    }
+  }, []);
+
   const handleStore = () => {
     updateThirdDiaryInfo({
-      questionId: 1,
-      question: '질문',
+      questionId: questionData.questionId,
+      question: questionData.questionText,
       answer: answerKeyword,
       writeDate: changeDateTimeFormat(new Date()),
       isPublic: isPublic,
@@ -121,6 +146,7 @@ const WriteThirdSoloDiaryScreen: React.FC<Props> = ({route}) => {
           isPublic={isPublic}
           setIsPublic={setIsPublic}
           soloDiary={{...thirdDiaryInfo, soloDiaryId: 0, exhId}}
+          questionData={questionData}
         />
         <ButtonView>
           <CustomTouchable onPress={onPress}>

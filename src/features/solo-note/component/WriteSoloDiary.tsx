@@ -20,6 +20,7 @@ import {
 import responsive from '~/components/util/responsiveSize';
 import {FONT_NAME} from '~/components/util/style';
 import {removeControlCharacter} from '~/components/util/checkKeyword';
+import {QuestionType} from '../util/randomQuestion';
 
 interface WriteSoloDiaryProps {
   answerKeyword: string;
@@ -27,6 +28,7 @@ interface WriteSoloDiaryProps {
   isPublic: boolean;
   setIsPublic: (isPublic: boolean) => void;
   soloDiary: SoloDiaryInfoType;
+  questionData: QuestionType;
 }
 
 const WriteSoloDiary: React.FC<WriteSoloDiaryProps> = ({
@@ -35,6 +37,7 @@ const WriteSoloDiary: React.FC<WriteSoloDiaryProps> = ({
   isPublic,
   setIsPublic,
   soloDiary,
+  questionData,
 }) => {
   const onChangeKeyword = useCallback((text: string) => {
     const cleaned = removeControlCharacter(text);
@@ -131,7 +134,7 @@ const WriteSoloDiary: React.FC<WriteSoloDiaryProps> = ({
       keyboardVerticalOffset={Platform.OS === 'ios' ? 12 : 0} // 상단 네비/탭 높이만큼 조절
     >
       {/* 질문 */}
-      <CenterQuestion question={soloDiary.question}>
+      <CenterQuestion question={questionData.questionText}>
         <CustomTouchable onPress={() => setIsPublic(!isPublic)}>
           {isPublic ? <PublicToggleIcon /> : <PrivateToggleIcon />}
         </CustomTouchable>

@@ -52,7 +52,7 @@ const MyDiaryScreen: React.FC<Props> = ({route}) => {
   const onPressNewButton = () => {
     // reset
     resetWriteDiaryInfo();
-    if (soloDiaryListWithEval?.soloDiaryInfoList?.length > 0) {
+    if (soloDiaryListWithEval?.evalInfoList.length > 0) {
       // initEval
       updateInitEval(false);
       navigation.navigate('WriteFirstSoloDiary', {exhId});
