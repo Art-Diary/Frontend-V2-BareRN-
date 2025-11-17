@@ -14,7 +14,6 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
-import {RecoilRoot} from 'recoil';
 import messaging from '@react-native-firebase/messaging';
 import {
   Alert,
@@ -23,8 +22,6 @@ import {
   PermissionsAndroid,
   Platform,
 } from 'react-native';
-// import {setNavigator} from './api/navigationService';
-// import {checkForUpdate} from './components/common/CheckForUpdate';
 import VersionCheck from 'react-native-version-check';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import MyDiaryScreen from './pages/solo-note/MyDiaryScreen';
@@ -50,6 +47,8 @@ import LikeListScreen from './pages/setting/LikeListScreen';
 import EditLikeListScreen from './pages/setting/EditLikeListScreen';
 import SettingNotiScreen from './pages/setting/SettingNotiScreen';
 import CalendarScreen from './pages/calendar/CalendarScreen';
+import pushNoti from './pushNoti';
+import {linking} from './deeplinkConfig';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -158,91 +157,79 @@ export default function App() {
   }, []);
 
   /** for foreground state */
-  // useEffect(() => {
-  //   getPermission();
+  useEffect(() => {
+    getPermission();
 
-  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
-  //     // console.log('foreground:', remoteMessage);
-  //     pushNoti.displayNoti(remoteMessage);
-  //   });
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      // console.log('foreground:', remoteMessage);
+      pushNoti.displayNoti(remoteMessage);
+    });
 
-  //   return unsubscribe;
-  // }, []);
+    return unsubscribe;
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer
-      // linking={linking}
-      // ref={(
-      //   navigatorRef: NavigationContainerRef<RootStackParamList> | null,
-      // ) => {
-      //   setNavigator(navigatorRef);
-      // }}
-      >
-        <RecoilRoot>
-          <Stack.Navigator
-            initialRouteName={'Login'}
-            screenOptions={{headerShown: false}}>
-            {/* 로그인 회원가입 */}
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Main" component={BottomTabs} />
-            <Stack.Screen name="Calendar" component={CalendarScreen} />
-            {/* 기록 */}
-            <Stack.Screen name="MyDiary" component={MyDiaryScreen} />
-            <Stack.Screen name="DoEvaluation" component={DoEvaluationScreen} />
-            <Stack.Screen
-              name="WriteFirstSoloDiary"
-              component={WriteFirstSoloDiaryScreen}
-            />
-            <Stack.Screen
-              name="WriteSecondSoloDiary"
-              component={WriteSecondSoloDiaryScreen}
-            />
-            <Stack.Screen
-              name="WriteThirdSoloDiary"
-              component={WriteThirdSoloDiaryScreen}
-            />
-            <Stack.Screen
-              name="UpdateSoloDiary"
-              component={UpdateSoloDiaryScreen}
-            />
-            <Stack.Screen
-              name="EditEvaluation"
-              component={EditEvaluationScreen}
-            />
-            {/* 전시회 */}
-            <Stack.Screen name="ExhDetail" component={ExhDetailScreen} />
-            <Stack.Screen
-              name="ExhForMoreReview"
-              component={ExhForMoreReviewScreen}
-            />
-            <Stack.Screen name="ExhSearch" component={ExhSearchScreen} />
-            {/* 친구/모임 */}
-            <Stack.Screen name="MateExhList" component={MateExhListScreen} />
-            <Stack.Screen
-              name="MateDiaryList"
-              component={MateDiaryListScreen}
-            />
-            <Stack.Screen
-              name="GatheringDetail"
-              component={GatheringDetailScreen}
-            />
-            <Stack.Screen
-              name="AddGatheringVisitExh"
-              component={AddGatheringVisitExhScreen}
-            />
-            <Stack.Screen
-              name="GatheringDiary"
-              component={GatheringDiaryScreen}
-            />
-            {/* 설정 */}
-            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-            <Stack.Screen name="LikeList" component={LikeListScreen} />
-            <Stack.Screen name="EditLikeList" component={EditLikeListScreen} />
-            <Stack.Screen name="SettingNoti" component={SettingNotiScreen} />
-            {/* <Stack.Screen name='QnaList' component={QnaListScreen} /> */}
-          </Stack.Navigator>
-        </RecoilRoot>
+      <NavigationContainer linking={linking}>
+        <Stack.Navigator
+          initialRouteName={'Login'}
+          screenOptions={{headerShown: false}}>
+          {/* 로그인 회원가입 */}
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Main" component={BottomTabs} />
+          <Stack.Screen name="Calendar" component={CalendarScreen} />
+          {/* 기록 */}
+          <Stack.Screen name="MyDiary" component={MyDiaryScreen} />
+          <Stack.Screen name="DoEvaluation" component={DoEvaluationScreen} />
+          <Stack.Screen
+            name="WriteFirstSoloDiary"
+            component={WriteFirstSoloDiaryScreen}
+          />
+          <Stack.Screen
+            name="WriteSecondSoloDiary"
+            component={WriteSecondSoloDiaryScreen}
+          />
+          <Stack.Screen
+            name="WriteThirdSoloDiary"
+            component={WriteThirdSoloDiaryScreen}
+          />
+          <Stack.Screen
+            name="UpdateSoloDiary"
+            component={UpdateSoloDiaryScreen}
+          />
+          <Stack.Screen
+            name="EditEvaluation"
+            component={EditEvaluationScreen}
+          />
+          {/* 전시회 */}
+          <Stack.Screen name="ExhDetail" component={ExhDetailScreen} />
+          <Stack.Screen
+            name="ExhForMoreReview"
+            component={ExhForMoreReviewScreen}
+          />
+          <Stack.Screen name="ExhSearch" component={ExhSearchScreen} />
+          {/* 친구/모임 */}
+          <Stack.Screen name="MateExhList" component={MateExhListScreen} />
+          <Stack.Screen name="MateDiaryList" component={MateDiaryListScreen} />
+          <Stack.Screen
+            name="GatheringDetail"
+            component={GatheringDetailScreen}
+          />
+          <Stack.Screen
+            name="AddGatheringVisitExh"
+            component={AddGatheringVisitExhScreen}
+          />
+          <Stack.Screen
+            name="GatheringDiary"
+            component={GatheringDiaryScreen}
+          />
+          {/* 설정 */}
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+          <Stack.Screen name="LikeList" component={LikeListScreen} />
+          <Stack.Screen name="EditLikeList" component={EditLikeListScreen} />
+          <Stack.Screen name="SettingNoti" component={SettingNotiScreen} />
+          {/* <Stack.Screen name='QnaList' component={QnaListScreen} /> */}
+        </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
   );

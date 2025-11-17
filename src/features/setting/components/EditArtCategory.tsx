@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {BACK_COLOR, DARK_GREY, MAIN_COLOR} from '~/components/util/colors';
+import {DARK_GREY, MAIN_COLOR} from '~/components/util/colors';
 import responsive from '~/components/util/responsiveSize';
 import {AREA_FONT_SIZE, FONT_NAME} from '~/components/util/style';
 
@@ -68,14 +68,12 @@ const EditArtCategory: React.FC<EditArtProps> = ({
             size={17}
             isChecked={item.isClicked}
             fillColor={MAIN_COLOR}
-            unFillColor={BACK_COLOR}
             text={item.name}
-            style={{paddingLeft: responsive(2)}}
-            iconStyle={{borderColor: 'red'}}
-            innerIconStyle={{borderWidth: 2}}
+            style={{paddingLeft: responsive(2), paddingTop: responsive(7)}}
+            iconStyle={{borderColor: MAIN_COLOR}}
             textStyle={{
               fontFamily: FONT_NAME,
-              fontSize: responsive(15),
+              fontSize: responsive(17),
               textDecorationLine: 'none',
             }}
             onPress={(isChecked: boolean) => {
