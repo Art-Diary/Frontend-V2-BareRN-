@@ -3,12 +3,12 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from '~/App';
 import {name as appName} from './app.json';
 import messaging from '@react-native-firebase/messaging';
 import notifee, {EventType} from '@notifee/react-native';
-// import pushNoti from '~/utils/pushNoti';
+import pushNoti from '~/pushNoti';
 import {Linking} from 'react-native';
+import App from './src/App';
 
 /** for background & quit state */
 
@@ -47,25 +47,10 @@ notifee.onForegroundEvent(async ({type, detail}) => {
 });
 
 notifee.onBackgroundEvent(async ({type, detail}) => {
-  console.log('background event');
+  // console.log('background event');
 
   if (type === EventType.PRESS) {
     await handlePressNotification(detail);
-    // const data = detail.notification?.data;
-
-    // if (data) {
-    //   const info = data.info;
-    //   const type = info.type;
-    //   const id = Number(info.id);
-
-    //   if (type === 'exhibition') {
-    //     await Linking.openURL(`artdiary://exhibition/${id}`);
-    //   } else if (type === 'gathering') {
-    //     await Linking.openURL(`artdiary://gathering/${id}`);
-    //   } else if (type === 'calendar') {
-    //     await Linking.openURL(`artdiary://calendar`);
-    //   }
-    // }
   } else if (type === EventType.DISMISSED) {
     await handleDismissedNotification(detail);
   }
@@ -73,7 +58,7 @@ notifee.onBackgroundEvent(async ({type, detail}) => {
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   // console.log('background:', remoteMessage);
-  // await pushNoti.displayNoti(remoteMessage);
+  await pushNoti.displayNoti(remoteMessage);
 });
 
 AppRegistry.registerComponent(appName, () => App);
