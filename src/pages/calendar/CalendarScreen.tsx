@@ -16,12 +16,25 @@ import CalendarGatheringSelector from '~/features/calendar/components/CalendarGa
 import ExhListOfDayInCalendar from '~/features/calendar/components/ExhListOfDayInCalendar';
 import {settingGatherColor} from '~/features/calendar/util/settingGatherColor';
 import PageFrame from '~/components/PageFrame';
+import {RootStackParamList} from '~/navigationTypes';
+import {RouteProp} from '@react-navigation/native';
 
-const CalendarScreen = () => {
+type CalendarProp = RouteProp<RootStackParamList, 'Calendar'>;
+
+interface Props {
+  route: CalendarProp;
+}
+
+const CalendarScreen: React.FC<Props> = ({route}) => {
+  const {date} = route.params;
   // 사용자가 선택한 날짜
-  const [selectedDate, setSelectedDate] = useState(dateToString(new Date()));
+  const [selectedDate, setSelectedDate] = useState(
+    date ?? dateToString(new Date()),
+  );
   // 월 변경 화살표 클릭 인식을 위한 상태 변화
-  const [changeMonth, setChangeMonth] = useState(dateToString(new Date()));
+  const [changeMonth, setChangeMonth] = useState(
+    date ?? dateToString(new Date()),
+  );
   // 일정이 있는 날짜 리스트
   const [markedDates, setMarkedDates] = useState<MarkedType[]>([]);
   const [gatheringId, setGatheringId] = useState<number>(-1);
@@ -44,6 +57,10 @@ const CalendarScreen = () => {
   );
 
   useApiErrorToast(isError);
+
+  useEffect(() => {
+    setGatheringId(-2);
+  }, [date]);
 
   useEffect(() => {
     if (gatheringList) {
@@ -78,17 +95,18 @@ const CalendarScreen = () => {
     <PageFrame>
       <LoadingModal isLoading={isLoading} />
       <CalendarGatheringSelector
-        initDate={dateToString(new Date())}
+        initDate={date ?? dateToString(new Date())}
         markedDates={markedDates}
         handleChangeSelectedDate={setSelectedDate}
         handleChangeMonth={setChangeMonth}
         gatherColorList={gatherColorList}
         handleGatheringId={setGatheringId}
         gatheringList={gatheringList}
+        gatheringId={gatheringId}
       />
       <DashLine />
       <ExhListOfDayInCalendar
-        isAlone={gatheringId < 0}
+        isAlone={gatheringId === -1}
         selectedDate={selectedDate}
         gatherColorList={gatherColorList}
         exhInfoListOfDays={exhInfoOfDays}

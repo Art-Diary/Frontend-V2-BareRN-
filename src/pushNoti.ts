@@ -13,6 +13,7 @@ const displayNotification = async (
   if (!message.data) {
     return;
   }
+
   const info = message.data;
   const titleData = info.title?.toString();
   const title = titleData?.split('/')[0];
@@ -23,8 +24,9 @@ const displayNotification = async (
   var value = undefined;
 
   if (type === 'calendar') {
-    value = body?.split('에')[0]; // TODO 수정
+    value = body?.split('에')[0];
   } else {
+    // gathering & exhibition
     value = Number(typeId);
   }
 

@@ -17,6 +17,7 @@ interface SelectorProps {
   handleGatheringId: (id: number) => void;
   gatherColorList: GatheringColorInfo[];
   gatheringList: GatheringInfoType[];
+  gatheringId: number;
 }
 
 const CalendarGatheringSelector: React.FC<SelectorProps> = ({
@@ -27,15 +28,20 @@ const CalendarGatheringSelector: React.FC<SelectorProps> = ({
   handleGatheringId,
   gatherColorList,
   gatheringList,
+  gatheringId,
 }) => {
   // State Management
   const [initialDate, setInitialDate] = useState(initDate);
-  const [selectedId, setSelectedId] = useState(-1); // 아이템 선택
+  const [selectedId, setSelectedId] = useState(gatheringId); // 아이템 선택
 
   // Effects
   useEffect(() => {
     setInitialDate(initDate);
   }, [initDate]);
+
+  useEffect(() => {
+    setSelectedId(gatheringId);
+  }, [gatheringId]);
 
   // Hooks
   // const navigation = useNavigation<RootStackNavigationProp>();

@@ -32,11 +32,11 @@ export type RootStackParamList = {
   };
   ExhSearch: undefined;
   // 캘린더
-  Calendar: undefined;
+  Calendar: {date?: string};
   // 친구/모임
   MateExhList: {mateInfo: MateInfoType};
   MateDiaryList: {mateInfo: MateInfoType; exhId: number};
-  GatheringDetail: {gatheringInfo: GatheringInfoType};
+  GatheringDetail: {gatheringId: number};
   AddGatheringVisitExh: {gatheringId: number};
   GatheringDiary: {gatheringId: number; exhId: number};
   // 설정

@@ -9,6 +9,8 @@ import notifee, {EventType} from '@notifee/react-native';
 import pushNoti from '~/pushNoti';
 import {Linking} from 'react-native';
 import App from './src/App';
+import {useUserInfo} from '~/zustand/userInfo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /** for background & quit state */
 
@@ -26,14 +28,15 @@ const handlePressNotification = async detail => {
   if (data) {
     const info = data.info;
     const type = info.type;
-    const id = Number(info.id);
+    const id = info.id;
 
     if (type === 'exhibition') {
-      await Linking.openURL(`artdiary://exhibition/${id}`);
+      await Linking.openURL(`artdiary://exhibition/${Number(id)}`);
     } else if (type === 'gathering') {
-      await Linking.openURL(`artdiary://gathering/${id}`);
+      await AsyncStorage.setItem('invitedGatheringPushNoti', 'yes');
+      await Linking.openURL(`artdiary://gathering/${Number(id)}`);
     } else if (type === 'calendar') {
-      await Linking.openURL(`artdiary://calendar`);
+      await Linking.openURL(`artdiary://calendar/${id}`);
     }
   }
 };

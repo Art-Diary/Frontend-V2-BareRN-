@@ -48,7 +48,6 @@ export const useLoginUser = () => {
       console.log('[Login] error Login');
     },
     onSuccess: async data => {
-      console.log('data:', data);
       const resData = data;
       try {
         await AsyncStorage.setItem('accessToken', resData.accessToken);
@@ -114,7 +113,6 @@ export const useUniteSocialLogin = () => {
       console.log('[UniteSocialLogin] error UniteSocialLogin');
     },
     onSuccess: async data => {
-      console.log('data:', data);
       const resData = data;
       try {
         await AsyncStorage.setItem('accessToken', resData.accessToken);
@@ -153,7 +151,6 @@ export const useSeparateSocialLogin = () => {
       console.log('[SeparateSocialLogin] error SeparateSocialLogin');
     },
     onSuccess: async data => {
-      console.log('data:', data);
       const resData = data;
       try {
         await AsyncStorage.setItem('accessToken', resData.accessToken);

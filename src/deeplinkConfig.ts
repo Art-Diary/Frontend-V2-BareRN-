@@ -9,10 +9,10 @@ export const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
       ExhDetail: 'exhibition/:exhId',
-      GatheringDetail: 'gathering/:gatherId',
+      GatheringDetail: 'gathering/:gatheringId',
       Main: {
         screens: {
-          Calendar: 'calendar',
+          Calendar: 'calendar/:date',
         },
       },
     },
