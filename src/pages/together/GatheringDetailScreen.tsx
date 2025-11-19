@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '~/navigationTypes';
-import {useFetchGatheringDetailInfo} from '~/api/gathering/gathering';
+import {
+  gatheringKeys,
+  useFetchGatheringDetailInfo,
+} from '~/api/gathering/gathering';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import LoadingModal from '~/components/modal/LoadingModal';
 import WithBackFrame from '~/components/WithBackFrame';
@@ -12,6 +15,8 @@ import {DASH_WIDTH} from '~/components/util/style';
 import responsive from '~/components/util/responsiveSize';
 import {LIGHT_GREY} from '~/components/util/colors';
 import PageFrame from '~/components/PageFrame';
+import {useQueryClient} from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type GatheringDetailProp = RouteProp<RootStackParamList, 'GatheringDetail'>;
 
@@ -20,7 +25,9 @@ interface Props {
 }
 
 const GatheringDetailScreen: React.FC<Props> = ({route}) => {
-  const {gatheringInfo} = route.params;
+  const {gatheringId} = route.params;
+  const queryClient = useQueryClient();
+  const havePushNoti = AsyncStorage.getItem('invitedGatheringPushNoti');
 
   // API Hooks
   const {
@@ -28,29 +35,48 @@ const GatheringDetailScreen: React.FC<Props> = ({route}) => {
     isLoading,
     isError,
     isSuccess,
-  } = useFetchGatheringDetailInfo(gatheringInfo.gatheringId);
+  } = useFetchGatheringDetailInfo(gatheringId);
 
   useApiErrorToast(isError);
+
+  useEffect(() => {
+    const checkPushNoti = async () => {
+      if ((await havePushNoti) === 'yes') {
+        queryClient.invalidateQueries({
+          queryKey: gatheringKeys.fetchGatheringList(),
+        });
+        await AsyncStorage.setItem('invitedGatheringPushNoti', 'no');
+      }
+    };
+    checkPushNoti();
+  }, [havePushNoti]);
 
   return (
     <PageFrame>
       <LoadingModal isLoading={isLoading} />
       {/* header */}
-      <WithBackFrame title={gatheringInfo.gatheringName ?? ''} line={true} />
-      {/* body */}
-      {isSuccess && (
+      {gatheringDetailInfo && (
         <>
-          {/* 모임 멤버 목록 */}
-          <GatheringMemberList
-            gatheringId={gatheringInfo.gatheringId}
-            memberList={gatheringDetailInfo.mates}
+          <WithBackFrame
+            title={gatheringDetailInfo.gatheringName ?? ''}
+            line={true}
           />
-          <DotLine />
-          {/* 전시회 목록 */}
-          <GatheringVisitExhList
-            gatheringId={gatheringInfo.gatheringId}
-            visitExhList={gatheringDetailInfo.exhibitions}
-          />
+          {/* body */}
+          {isSuccess && (
+            <>
+              {/* 모임 멤버 목록 */}
+              <GatheringMemberList
+                gatheringId={gatheringDetailInfo.gatheringId}
+                memberList={gatheringDetailInfo.mates}
+              />
+              <DotLine />
+              {/* 전시회 목록 */}
+              <GatheringVisitExhList
+                gatheringId={gatheringDetailInfo.gatheringId}
+                visitExhList={gatheringDetailInfo.exhibitions}
+              />
+            </>
+          )}
         </>
       )}
     </PageFrame>

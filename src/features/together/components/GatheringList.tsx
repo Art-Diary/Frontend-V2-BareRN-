@@ -28,12 +28,7 @@ const GatheringList = () => {
   };
 
   const pressEnterGathering = (item: GatheringInfoType) => {
-    navigation.navigate('GatheringDetail', {
-      gatheringInfo: {
-        gatheringId: item.gatheringId,
-        gatheringName: item.gatheringName,
-      },
-    });
+    navigation.navigate('GatheringDetail', {gatheringId: item.gatheringId});
   };
 
   return (
