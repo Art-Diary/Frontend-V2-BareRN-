@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMutation, UseMutationResult} from '@tanstack/react-query';
+import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
 import {LoginUserType} from '~/features/login/util/loginType';
 
@@ -48,13 +48,11 @@ export const useLoginUser = () => {
       console.log('[Login] error Login');
     },
     onSuccess: async data => {
-      const resData = data;
+      const resData = data.data;
+
       try {
         await AsyncStorage.setItem('accessToken', resData.accessToken);
-        await AsyncStorage.setItem(
-          'initInfo',
-          JSON.stringify(resData.initInfo),
-        );
+        await AsyncStorage.setItem('refreshToken', resData.refreshToken);
         console.log('[Login] success Login');
       } catch (error) {
         console.log('[AsyncStorage] Error storing userId', error);

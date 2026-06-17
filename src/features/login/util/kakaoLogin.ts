@@ -10,9 +10,8 @@ export const handleKakaoLogin = async (): Promise<
     const profileResult = await getProfile();
     if (profileResult) {
       return {
-        email: profileResult.email,
-        providerType: 'kakao',
-        providerId: profileResult.id.toString(),
+        providerType: 'KAKAO',
+        providerUserId: profileResult.id.toString(),
       };
     } else {
       return undefined;

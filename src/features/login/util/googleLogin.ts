@@ -19,9 +19,8 @@ export const handleGoogleLogin = async (): Promise<
       var googleCredential = auth.GoogleAuthProvider.credential(idToken);
       await auth().signInWithCredential(googleCredential);
       return {
-        email: user.email,
-        providerType: 'google',
-        providerId: user.id,
+        providerType: 'GOOGLE',
+        providerUserId: user.id,
       };
     }
     return undefined;
