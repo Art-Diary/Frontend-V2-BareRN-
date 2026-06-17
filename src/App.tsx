@@ -47,6 +47,7 @@ import LikeListScreen from './pages/setting/LikeListScreen';
 import EditLikeListScreen from './pages/setting/EditLikeListScreen';
 import SettingNotiScreen from './pages/setting/SettingNotiScreen';
 import CalendarScreen from './pages/calendar/CalendarScreen';
+import SplashScreen from './pages/login/SplashScreen';
 import pushNoti from './pushNoti';
 import {linking} from './deeplinkConfig';
 
@@ -118,7 +119,7 @@ export default function App() {
 
   useEffect(() => {
     const checkForUpdate = async () => {
-      console.log('첫진입 시작');
+      console.log('IN App');
       //기기에 설치되 있는 버전
       let CurrentVersion = VersionCheck.getCurrentVersion();
       //앱의 최신버전
@@ -172,8 +173,9 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <NavigationContainer linking={linking}>
         <Stack.Navigator
-          initialRouteName={'Login'}
+          initialRouteName={'Splash'}
           screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Splash" component={SplashScreen} />
           {/* 로그인 회원가입 */}
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Main" component={BottomTabs} />
