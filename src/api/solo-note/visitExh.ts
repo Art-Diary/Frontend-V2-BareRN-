@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import {calendarKeys} from '../calendar/calendar';
-import {exhibitionKeys} from '../exhibition/exhibitionInfo';
+import {exhibitionKeys} from '../exhibition/exhibition';
 import {VisitExhCReqType} from '~/features/solo-note/util/soloDiaryType';
 
 export const myVisitExhKeys = {

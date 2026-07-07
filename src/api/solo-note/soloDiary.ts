@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
-import {exhibitionKeys} from '../exhibition/exhibitionInfo';
+import {exhibitionKeys} from '../exhibition/exhibition';
 import {
   SoloDiaryCReqType,
   SoloDiaryDReqType,

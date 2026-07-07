@@ -1,4 +1,4 @@
-export const BACK_COLOR = '#f6f6f6';
+export const BACK_COLOR = '#fafdfe'; // #f6f6f6
 export const LIGHT_GREY = '#C1C1C1';
 export const DARK_GREY = '#3c4045';
 export const BORDER_COLOR = '#D3D3D3';
