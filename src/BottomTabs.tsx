@@ -18,10 +18,9 @@ import {
 } from './components/icon';
 import responsive from './components/util/responsiveSize';
 import MyVisitExhListScreen from './pages/solo-note/MyVisitExhListScreen';
-import CalendarScreen from './pages/calendar/CalendarScreen';
-import ExhListScreen from './pages/exhibition/ExhListScreen';
 import MateMainScreen from './pages/together/MateMainScreen';
 import SettingScreen from './pages/setting/SettingScreen';
+import SearchScreen from './pages/exhibition/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -105,12 +104,7 @@ const BottomTabs = () => {
         tabBarStyle: {...footerStyles.view},
       })}
       backBehavior="none">
-      <Tab.Screen name="Exhibition" component={ExhListScreen} />
-      <Tab.Screen
-        name="Calendar"
-        component={CalendarScreen}
-        initialParams={{modalOpen: false}}
-      />
+      <Tab.Screen name="Exhibition" component={SearchScreen} />
       <Tab.Screen name="Diary" component={MyVisitExhListScreen} />
       <Tab.Screen name="Mate" component={MateMainScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />

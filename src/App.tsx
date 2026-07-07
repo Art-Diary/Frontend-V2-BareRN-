@@ -34,9 +34,6 @@ import WriteSecondSoloDiaryScreen from './pages/solo-note/WriteSecondSoloDiarySc
 import WriteThirdSoloDiaryScreen from './pages/solo-note/WriteThirdSoloDiaryScreen';
 import UpdateSoloDiaryScreen from './pages/solo-note/UpdateSoloDiaryScreen';
 import EditEvaluationScreen from './pages/solo-note/EditEvaluationScreen';
-import ExhDetailScreen from './pages/exhibition/ExhDetailScreen';
-import ExhForMoreReviewScreen from './pages/exhibition/ExhForMoreReviewScreen';
-import ExhSearchScreen from './pages/exhibition/ExhSearchScreen';
 import MateExhListScreen from './pages/together/MateExhListScreen';
 import MateDiaryListScreen from './pages/together/MateDiaryListScreen';
 import GatheringDetailScreen from './pages/together/GatheringDetailScreen';
@@ -46,10 +43,10 @@ import EditProfileScreen from './pages/setting/EditProfileScreen';
 import LikeListScreen from './pages/setting/LikeListScreen';
 import EditLikeListScreen from './pages/setting/EditLikeListScreen';
 import SettingNotiScreen from './pages/setting/SettingNotiScreen';
-import CalendarScreen from './pages/calendar/CalendarScreen';
 import SplashScreen from './pages/login/SplashScreen';
 import pushNoti from './pushNoti';
 import {linking} from './deeplinkConfig';
+import ExhibitionDetailScreen from './pages/exhibition/ExhibitionDetailScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -179,7 +176,6 @@ export default function App() {
           {/* 로그인 회원가입 */}
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Main" component={BottomTabs} />
-          <Stack.Screen name="Calendar" component={CalendarScreen} />
           {/* 기록 */}
           <Stack.Screen name="MyDiary" component={MyDiaryScreen} />
           <Stack.Screen name="DoEvaluation" component={DoEvaluationScreen} />
@@ -204,12 +200,10 @@ export default function App() {
             component={EditEvaluationScreen}
           />
           {/* 전시회 */}
-          <Stack.Screen name="ExhDetail" component={ExhDetailScreen} />
           <Stack.Screen
-            name="ExhForMoreReview"
-            component={ExhForMoreReviewScreen}
+            name="ExhibitionDetail"
+            component={ExhibitionDetailScreen}
           />
-          <Stack.Screen name="ExhSearch" component={ExhSearchScreen} />
           {/* 친구/모임 */}
           <Stack.Screen name="MateExhList" component={MateExhListScreen} />
           <Stack.Screen name="MateDiaryList" component={MateDiaryListScreen} />
@@ -230,7 +224,6 @@ export default function App() {
           <Stack.Screen name="LikeList" component={LikeListScreen} />
           <Stack.Screen name="EditLikeList" component={EditLikeListScreen} />
           <Stack.Screen name="SettingNoti" component={SettingNotiScreen} />
-          {/* <Stack.Screen name='QnaList' component={QnaListScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

@@ -1,35 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {InfiniteData, useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
-import {exhibitionKeys} from './exhibitionInfo';
-import {DeleteLikeType} from '~/features/setting/util/likeType';
+import {ExhibitionDetail, ExhibitionPage} from '~/types/exhibition';
 
-export const likeKeys = {
-  fetchLikeList: () => ['fetchLikeList'] as const,
-};
-
-const fetchLikeList = async () => {
-  const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(`${process.env.API_URL}/like-exhibitions`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.data;
-};
-
-export const useFetchLikeList = () =>
-  useQuery({
-    queryKey: likeKeys.fetchLikeList(),
-    queryFn: () => fetchLikeList(),
-    staleTime: 500000,
-  });
-
-const createLikeExh = async (exhId: number) => {
+const createLikeExhibition = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
   const res = await axios.post(
-    `${process.env.API_URL}/like-exhibitions`,
-    {exhId: exhId},
+    `${process.env.API_URL}/exhibitions/${exhId}/likes`,
+    null,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,86 +17,207 @@ const createLikeExh = async (exhId: number) => {
   return res.data;
 };
 
-export const useCreateLikeExh = () => {
+export const useCreateLikeExhibition = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (exhId: number) => createLikeExh(exhId),
-    onError: err => {
-      console.log(err);
-      console.log('[CreateLikeExh] error create CreateLikeExh');
-    },
-    onSuccess: async (data, variables) => {
-      console.log('[CreateLikeExh] success create CreateLikeExh');
-      queryClient.invalidateQueries({
-        queryKey: exhibitionKeys.exhibitionDetail(variables),
+    mutationFn: (exhId: number) => createLikeExhibition(exhId),
+
+    onMutate: async (exhId: number) => {
+      // 이전 데이터 저장 (에러 시 복구용)
+      const previousLists = queryClient.getQueriesData({
+        queryKey: ['exhibitionList'],
       });
-      queryClient.invalidateQueries({queryKey: exhibitionKeys.listRoot});
-      queryClient.invalidateQueries({queryKey: likeKeys.fetchLikeList()});
+
+      const previousDetail = queryClient.getQueryData([
+        'exhibitionDetail',
+        exhId,
+      ]);
+
+      // 쿼리 캔슬
+      await queryClient.cancelQueries({
+        queryKey: ['exhibitionList'],
+      });
+
+      await queryClient.cancelQueries({
+        queryKey: ['exhibitionDetail', exhId],
+      });
+
+      // 목록 캐시 수정
+      queryClient.setQueriesData(
+        {
+          queryKey: ['exhibitionList'],
+        },
+        (old: InfiniteData<ExhibitionPage> | undefined) => {
+          if (!old) {
+            return old;
+          }
+
+          return {
+            ...old,
+            pages: old.pages.map(page => ({
+              ...page,
+              content: page.content.map(exhibition =>
+                exhibition.exhId === exhId
+                  ? {
+                      ...exhibition,
+                      liked: true,
+                    }
+                  : exhibition,
+              ),
+            })),
+          };
+        },
+      );
+
+      // 상세 캐시 수정
+      queryClient.setQueryData(
+        ['exhibitionDetail', exhId],
+        (old: ExhibitionDetail | undefined) => {
+          if (!old) {
+            return old;
+          }
+
+          return {
+            ...old,
+            liked: true,
+          };
+        },
+      );
+
+      return {
+        previousLists,
+        previousDetail,
+      };
     },
+
+    onError: (_, exhId, context) => {
+      context?.previousLists.forEach(([queryKey, data]) => {
+        queryClient.setQueryData(queryKey, data);
+      });
+
+      queryClient.setQueryData(
+        ['exhibitionDetail', exhId],
+        context?.previousDetail,
+      );
+    },
+
+    // onSettled: (_, __, exhId) => {
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['exhibitionList'],
+    //   });
+
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['exhibitionDetail', exhId],
+    //   });
+    // },
   });
 };
 
-const deleteLikeExh = async (exhId: number) => {
+const deleteLikeExhibition = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
+
   const res = await axios.delete(
-    `${process.env.API_URL}/like-exhibitions/${exhId}`,
+    `${process.env.API_URL}/exhibitions/${exhId}/likes`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+
   return res.data;
 };
 
-export const useDeleteLikeExh = () => {
+export const useDeleteLikeExhibition = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (exhId: number) => deleteLikeExh(exhId),
-    onError: err => {
-      console.log(err);
-      console.log('[DeleteLikeExh] error delete DeleteLikeExh');
-    },
-    onSuccess: async (data, variables) => {
-      console.log('[DeleteLikeExh] success delete DeleteLikeExh');
-      queryClient.invalidateQueries({
-        queryKey: exhibitionKeys.exhibitionDetail(variables),
+    mutationFn: deleteLikeExhibition,
+
+    onMutate: async (exhId: number) => {
+      const previousLists = queryClient.getQueriesData({
+        queryKey: ['exhibitionList'],
       });
-      queryClient.invalidateQueries({queryKey: exhibitionKeys.listRoot});
-      queryClient.invalidateQueries({queryKey: likeKeys.fetchLikeList()});
-    },
-  });
-};
 
-const deleteLikeExhList = async (exhList: DeleteLikeType[]) => {
-  const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.post(
-    `${process.env.API_URL}/like-exhibitions/unlike`,
-    exhList,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  return res.data;
-};
+      const previousDetail = queryClient.getQueryData([
+        'exhibitionDetail',
+        exhId,
+      ]);
 
-export const useDeleteLikeExhList = () => {
-  const queryClient = useQueryClient();
+      await queryClient.cancelQueries({
+        queryKey: ['exhibitionList'],
+      });
 
-  return useMutation({
-    mutationFn: (exhList: DeleteLikeType[]) => deleteLikeExhList(exhList),
-    onError: err => {
-      console.log(err);
-      console.log('[DeleteLikeExhList] error delete DeleteLikeExhList');
+      await queryClient.cancelQueries({
+        queryKey: ['exhibitionDetail', exhId],
+      });
+
+      queryClient.setQueriesData(
+        {
+          queryKey: ['exhibitionList'],
+        },
+        (old: InfiniteData<ExhibitionPage> | undefined) => {
+          if (!old) {
+            return old;
+          }
+
+          return {
+            ...old,
+            pages: old.pages.map(page => ({
+              ...page,
+              content: page.content.map(exhibition =>
+                exhibition.exhId === exhId
+                  ? {
+                      ...exhibition,
+                      liked: false,
+                    }
+                  : exhibition,
+              ),
+            })),
+          };
+        },
+      );
+
+      queryClient.setQueryData(
+        ['exhibitionDetail', exhId],
+        (old: ExhibitionDetail | undefined) => {
+          if (!old) {
+            return old;
+          }
+
+          return {
+            ...old,
+            liked: false,
+          };
+        },
+      );
+
+      return {
+        previousLists,
+        previousDetail,
+      };
     },
-    onSuccess: async (data, variables) => {
-      console.log('[DeleteLikeExhList] success delete DeleteLikeExhList');
-      queryClient.invalidateQueries({queryKey: exhibitionKeys.listRoot});
-      queryClient.invalidateQueries({queryKey: likeKeys.fetchLikeList()});
+
+    onError: (_, exhId, context) => {
+      context?.previousLists.forEach(([queryKey, data]) => {
+        queryClient.setQueryData(queryKey, data);
+      });
+
+      queryClient.setQueryData(
+        ['exhibitionDetail', exhId],
+        context?.previousDetail,
+      );
     },
+
+    // onSettled: (_, __, exhId) => {
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['exhibitionList'],
+    //   });
+
+    //   queryClient.invalidateQueries({
+    //     queryKey: ['exhibitionDetail', exhId],
+    //   });
+    // },
   });
 };

@@ -4,10 +4,10 @@ import {BackHandler} from 'react-native';
 import styled from 'styled-components/native';
 import CustomTouchable from './CustomTouchable';
 import {RootStackNavigationProp} from '~/App';
-import {BackButtonIcon} from './icon';
 import responsive from './util/responsiveSize';
 import {BORDER_COLOR, DARK_GREY} from './util/colors';
-import {BACK_FONT_SIZE, DASH_WIDTH, FONT_NAME} from './util/style';
+import {DASH_WIDTH, FONT_NAME} from './util/style';
+import {ArrowLeft} from 'lucide-react-native';
 
 interface BackProps {
   title?: string;
@@ -35,12 +35,13 @@ const WithBackFrame: React.FC<BackProps> = ({title, line, children}) => {
 
   return (
     <Container line={line}>
-      <LeftSection>
-        <CustomTouchable onPress={handlePressBack}>
-          <BackButtonIcon />
-        </CustomTouchable>
+      <CustomTouchable onPress={handlePressBack}>
+        <ArrowLeft size={20} color="#8BA1B0" />
+      </CustomTouchable>
+
+      <TitleSection>
         <Title>{title}</Title>
-      </LeftSection>
+      </TitleSection>
       {children}
     </Container>
   );
@@ -55,12 +56,8 @@ interface ContainerProps {
 
 const Container = styled.View<ContainerProps>`
   flex-direction: row;
-  justify-content: space-between; /* 양 끝으로 버튼 배치 */
   align-items: center;
-  padding-top: ${responsive(10)}px;
-  padding-bottom: ${responsive(9)}px;
-  padding-left: ${responsive(15)}px;
-  padding-right: ${responsive(15)}px;
+  padding: ${responsive(10)}px ${responsive(15)}px;
   width: 100%;
   border-style: ${(props: ContainerProps) => (props.line ? `dashed` : `none`)};
   border-color: ${BORDER_COLOR};
@@ -68,14 +65,13 @@ const Container = styled.View<ContainerProps>`
     props.line ? `${DASH_WIDTH}` : `0`}px;
 `;
 
-const Title = styled.Text`
-  font-size: ${BACK_FONT_SIZE}px;
-  color: ${DARK_GREY};
-  font-family: ${FONT_NAME};
+const TitleSection = styled.View`
+  flex: 1;
+  align-items: center;
 `;
 
-const LeftSection = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: ${responsive(8)}px;
+const Title = styled.Text`
+  font-size: ${responsive(15)}px;
+  color: ${DARK_GREY};
+  font-family: ${FONT_NAME};
 `;

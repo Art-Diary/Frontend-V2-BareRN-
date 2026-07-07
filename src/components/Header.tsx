@@ -1,37 +1,47 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {DASH_WIDTH, FONT_NAME, HEADER_FONT_SIZE} from './util/style';
+import {FONT_NAME, HEADER_FONT_SIZE} from './util/style';
 import responsive from './util/responsiveSize';
-import {BACK_COLOR, BORDER_COLOR, DARK_GREY, MAIN_COLOR} from './util/colors';
+import {MAIN_COLOR} from './util/colors';
 
 interface HeaderProps {
   title: string;
   children?: ReactNode;
   needColor?: boolean;
+  subTitle?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({title, children, needColor}) => {
+const Header: React.FC<HeaderProps> = ({
+  title,
+  children,
+  needColor,
+  subTitle,
+}) => {
   return (
-    <Container>
-      <Title needColor={needColor}>{title}</Title>
-      {children}
-    </Container>
+    <Conatiner>
+      <Main>
+        <Title needColor={needColor}>{title}</Title>
+        {children}
+      </Main>
+      {subTitle && <SubTitle>{subTitle}</SubTitle>}
+    </Conatiner>
   );
 };
 
 export default Header;
 
 /** style */
-const Container = styled.View`
+const Conatiner = styled.View`
+  flex-direction: column;
+  padding: ${responsive(13)}px ${responsive(20)}px;
+  gap: ${responsive(5)}px;
+`;
+
+const Main = styled.View`
   flex-direction: row;
-  justify-content: space-between; /* 양 끝으로 버튼 배치 */
+  justify-content: space-between;
   align-items: center;
-  padding: ${responsive(13)}px;
   width: 100%;
-  /* border-style: dashed;
-  border-color: ${BORDER_COLOR};
-  border-bottom-width: ${DASH_WIDTH}px;
-  background-color: ${BACK_COLOR}; */
 `;
 
 interface TitleProps {
@@ -40,8 +50,13 @@ interface TitleProps {
 
 const Title = styled.Text<TitleProps>`
   font-size: ${HEADER_FONT_SIZE}px;
-  color: ${DARK_GREY};
   color: ${(props: TitleProps) =>
-    props.needColor ? `${MAIN_COLOR}` : `${DARK_GREY}`};
+    props.needColor ? `${MAIN_COLOR}` : `${MAIN_COLOR}`};
+  font-family: ${FONT_NAME};
+`;
+
+const SubTitle = styled.Text<TitleProps>`
+  font-size: ${responsive(13)}px;
+  color: #8ba1b0;
   font-family: ${FONT_NAME};
 `;

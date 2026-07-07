@@ -3,36 +3,6 @@ import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
 import {LoginUserType} from '~/features/login/util/loginType';
 
-// TODO 삭제
-const loginUserTest = async (userId: number) => {
-  const res = await axios.post(`${process.env.API_URL}/users/test`, {
-    userId,
-  });
-  return res.data;
-};
-
-// TODO 삭제
-export const useLoginTest = () => {
-  return useMutation({
-    mutationFn: (userId: number) => loginUserTest(userId),
-    onError: err => {
-      console.log(err);
-      console.log('[Tester Login] error Login');
-    },
-    onSuccess: async (res: any) => {
-      console.log(res);
-      try {
-        await AsyncStorage.setItem('accessToken', res.accessToken);
-        await AsyncStorage.setItem('initInfo', JSON.stringify(res.initInfo));
-        console.log('[Tester Login] success Login');
-      } catch (error) {
-        console.log('[AsyncStorage] Error storing userId', error);
-      }
-      return res;
-    },
-  });
-};
-
 const loginUser = async (loginInfo: LoginUserType) => {
   const res = await axios.post(`${process.env.API_URL}/users`, {
     ...loginInfo,
