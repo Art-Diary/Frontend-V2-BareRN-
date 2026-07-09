@@ -16,4 +16,4 @@ export const AREA_FONT_SIZE: number = responsive(17);
 
 export const BACK_FONT_SIZE: number = responsive(18);
 
-export const HEADER_FONT_SIZE: number = responsive(20.5);
+export const HEADER_FONT_SIZE: number = responsive(25);

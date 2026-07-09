@@ -16,7 +16,7 @@ import {Exhibition} from '~/types/exhibition';
 import {useFetchExhibitionList} from '~/api/exhibition/exhibition';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import PageFrame from '~/components/PageFrame';
-import Header from '~/components/Header';
+import Header from '~/components/common/Header';
 import {Search} from 'lucide-react-native';
 import ExhibitionCard from '~/components/exhibition/ExhibitionCard';
 import LoadingModal from '~/components/modal/LoadingModal';
@@ -109,7 +109,7 @@ export default function SearchScreen() {
           <Search size={18} color="#A2B6C5" />
 
           <SearchInput
-            placeholder="전시 이름, 작가, 미술관 검색..."
+            placeholder="전시회 이름, 작가, 미술관 검색..."
             value={keyword}
             onChangeText={onChangeText}
             onSubmitEditing={handleSearch}

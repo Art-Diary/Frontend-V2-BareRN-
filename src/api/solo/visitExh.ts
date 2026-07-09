@@ -1,7 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import {showToast} from '~/components/util/toastConfig';
+
+export const soloVisitExhKeys = {
+  fetchSoloVisitedExhList: () => ['fetchSoloVisitedExhList'] as const,
+};
 
 const createVisitExh = async (exhId: number, visitDate: string) => {
   const token = await AsyncStorage.getItem('accessToken');
@@ -37,9 +41,26 @@ export const useCreateVisitExh = () => {
         queryKey: ['exhibitionDetail', variables.exhId],
       });
 
-      // queryClient.invalidateQueries({
-      //   queryKey: myVisitExhKeys.fetchMyExhList(),
-      // });
+      queryClient.invalidateQueries({
+        queryKey: ['fetchSoloVisitedExhList'],
+      });
     },
   });
 };
+
+const fetchSoloVisitedExhList = async () => {
+  const token = await AsyncStorage.getItem('accessToken');
+  const res = await axios.get(`${process.env.API_URL}/users/me/visits`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data.data;
+};
+
+export const useFetchSoloVisitedExhList = () =>
+  useQuery({
+    queryKey: soloVisitExhKeys.fetchSoloVisitedExhList(),
+    queryFn: fetchSoloVisitedExhList,
+    staleTime: 500000,
+  });
