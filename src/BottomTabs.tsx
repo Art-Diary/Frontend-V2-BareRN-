@@ -17,10 +17,10 @@ import {
   OnSettingIcon,
 } from './components/icon';
 import responsive from './components/util/responsiveSize';
-import MyVisitExhListScreen from './pages/solo-note/MyVisitExhListScreen';
 import MateMainScreen from './pages/together/MateMainScreen';
 import SettingScreen from './pages/setting/SettingScreen';
 import SearchScreen from './pages/exhibition/SearchScreen';
+import SoloVisitedExhListScreen from './pages/solo/SoloVisitedExhListScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -105,7 +105,7 @@ const BottomTabs = () => {
       })}
       backBehavior="none">
       <Tab.Screen name="Exhibition" component={SearchScreen} />
-      <Tab.Screen name="Diary" component={MyVisitExhListScreen} />
+      <Tab.Screen name="Diary" component={SoloVisitedExhListScreen} />
       <Tab.Screen name="Mate" component={MateMainScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>

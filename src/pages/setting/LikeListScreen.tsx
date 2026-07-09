@@ -7,12 +7,12 @@ import {useFetchLikeList} from '~/api/exhibition/likeExh';
 import ExhItemView from '~/components/ExhItemView';
 import InfoMessageView from '~/components/InfoMessageView';
 import PageFrame from '~/components/PageFrame';
-import WithBackFrame from '~/components/WithBackFrame';
 import CustomTouchable from '~/components/CustomTouchable';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
 import LoadingModal from '~/components/modal/LoadingModal';
 import responsive from '~/components/util/responsiveSize';
 import {PencilUpdateNoUnderbarIcon} from '~/components/icon';
+import WithBackFrame from '~/components/common/WithBackFrame';
 
 const LikeListScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();

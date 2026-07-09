@@ -2,12 +2,12 @@ import {useNavigation} from '@react-navigation/native';
 import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BackHandler} from 'react-native';
 import styled from 'styled-components/native';
-import CustomTouchable from './CustomTouchable';
 import {RootStackNavigationProp} from '~/App';
-import responsive from './util/responsiveSize';
-import {BORDER_COLOR, DARK_GREY} from './util/colors';
-import {DASH_WIDTH, FONT_NAME} from './util/style';
+import {BORDER_COLOR, DARK_GREY} from '../util/colors';
+import {DASH_WIDTH, FONT_NAME} from '../util/style';
 import {ArrowLeft} from 'lucide-react-native';
+import CustomTouchable from '../CustomTouchable';
+import responsive from '../util/responsiveSize';
 
 interface BackProps {
   title?: string;

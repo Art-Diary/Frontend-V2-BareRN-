@@ -7,7 +7,7 @@ import {RootStackNavigationProp} from '~/App';
 import React from 'react';
 import {Linking, ScrollView} from 'react-native';
 import styled from 'styled-components/native';
-import Header from '~/components/Header';
+import Header from '~/components/common/Header';
 import NameTag from '~/components/NameTag';
 import PageFrame from '~/components/PageFrame';
 import {DARK_GREY} from '~/components/util/colors';
@@ -49,6 +49,11 @@ export default function SettingScreen() {
     // }
   };
 
+  const onPressLeaveButton = () => {
+    // [TODO]
+    // 탈퇴 완료했을 때 전시회 상세 정보 중 기록에 탈퇴한 사용자가 보이는지 확인
+  };
+
   return (
     <PageFrame>
       {/* header */}
@@ -73,10 +78,12 @@ export default function SettingScreen() {
               content="푸시 알림 설정"
               handleTouch={onPressSettingNotiButton}
             />
-            {/* <NameTag
-              content='Q&A'
-              handleTouch={() => navigation.navigate('QnaList', {isAdmin: false})}
-            /> */}
+            <NameTag
+              content="Q&A"
+              handleTouch={() =>
+                navigation.navigate('QnaList', {isAdmin: false})
+              }
+            />
             {/* {userInfo.authInfo.role === 'ADMIN' && (
               <NameTag
                 content="Q&A (관리자)"
@@ -106,10 +113,7 @@ export default function SettingScreen() {
             <TitleText>회원정보</TitleText>
             <NameTag content="로그아웃" handleTouch={handleLogout} />
             {/* [TODO] */}
-            {/* <GreyNameTag
-              content="탈퇴"
-              handleTouch={() => handleMoveTo('LeaveArtDiary')}
-            /> */}
+            <NameTag content="탈퇴" handleTouch={onPressLeaveButton} />
           </SettingWrapper>
         </Contents>
       </ScrollView>

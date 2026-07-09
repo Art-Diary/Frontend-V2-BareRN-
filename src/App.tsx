@@ -24,16 +24,9 @@ import {
 } from 'react-native';
 import VersionCheck from 'react-native-version-check';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import MyDiaryScreen from './pages/solo-note/MyDiaryScreen';
 import BottomTabs from './BottomTabs';
 import {RootStackParamList} from './navigationTypes';
 import LoginScreen from './pages/login/LoginScreen';
-import DoEvaluationScreen from './pages/solo-note/DoEvaluationScreen';
-import WriteFirstSoloDiaryScreen from './pages/solo-note/WriteFirstSoloDiaryScreen';
-import WriteSecondSoloDiaryScreen from './pages/solo-note/WriteSecondSoloDiaryScreen';
-import WriteThirdSoloDiaryScreen from './pages/solo-note/WriteThirdSoloDiaryScreen';
-import UpdateSoloDiaryScreen from './pages/solo-note/UpdateSoloDiaryScreen';
-import EditEvaluationScreen from './pages/solo-note/EditEvaluationScreen';
 import MateExhListScreen from './pages/together/MateExhListScreen';
 import MateDiaryListScreen from './pages/together/MateDiaryListScreen';
 import GatheringDetailScreen from './pages/together/GatheringDetailScreen';
@@ -47,6 +40,9 @@ import SplashScreen from './pages/login/SplashScreen';
 import pushNoti from './pushNoti';
 import {linking} from './deeplinkConfig';
 import ExhibitionDetailScreen from './pages/exhibition/ExhibitionDetailScreen';
+import PersonalDetailScreen from './pages/solo/PersonalDetailScreen';
+import CreateSoloDiaryScreen from './pages/solo/CreateSoloDiaryScreen';
+import QuestionScreen from './pages/solo/QuestionScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -177,28 +173,16 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Main" component={BottomTabs} />
           {/* 기록 */}
-          <Stack.Screen name="MyDiary" component={MyDiaryScreen} />
-          <Stack.Screen name="DoEvaluation" component={DoEvaluationScreen} />
           <Stack.Screen
-            name="WriteFirstSoloDiary"
-            component={WriteFirstSoloDiaryScreen}
+            name="PersonalDetail"
+            component={PersonalDetailScreen}
           />
           <Stack.Screen
-            name="WriteSecondSoloDiary"
-            component={WriteSecondSoloDiaryScreen}
+            name="CreateSoloDiary"
+            component={CreateSoloDiaryScreen}
           />
-          <Stack.Screen
-            name="WriteThirdSoloDiary"
-            component={WriteThirdSoloDiaryScreen}
-          />
-          <Stack.Screen
-            name="UpdateSoloDiary"
-            component={UpdateSoloDiaryScreen}
-          />
-          <Stack.Screen
-            name="EditEvaluation"
-            component={EditEvaluationScreen}
-          />
+          <Stack.Screen name="Question" component={QuestionScreen} />
+
           {/* 전시회 */}
           <Stack.Screen
             name="ExhibitionDetail"

@@ -6,7 +6,6 @@ import styled from 'styled-components/native';
 import {useUpdateUserInfo} from '~/api/auth/userInfo';
 import BodyFrame from '~/components/BodyFrame';
 import PageFrame from '~/components/PageFrame';
-import WithBackFrame from '~/components/WithBackFrame';
 import CustomTouchable from '~/components/CustomTouchable';
 import {GoogleLogoIcon, KakaoLogoIcon, NaverLogoIcon} from '~/components/icon';
 import LoadingModal from '~/components/modal/LoadingModal';
@@ -25,6 +24,7 @@ import EditNickname from '~/features/setting/components/EditNickname';
 import ImageInputForm from '~/features/setting/components/ImageInputForm';
 import {changeImageSize} from '~/features/setting/util/resizeImage';
 import {useUserInfo} from '~/zustand/userInfo';
+import WithBackFrame from '~/components/common/WithBackFrame';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();

@@ -5,7 +5,6 @@ import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {useDeleteLikeExhList} from '~/api/exhibition/likeExh';
 import PageFrame from '~/components/PageFrame';
-import WithBackFrame from '~/components/WithBackFrame';
 import CustomTouchable from '~/components/CustomTouchable';
 import LoadingModal from '~/components/modal/LoadingModal';
 import responsive from '~/components/util/responsiveSize';
@@ -14,6 +13,7 @@ import ExhInfoWithHeart from '~/features/setting/components/ExhInfoWithHeart';
 import {DeleteLikeType} from '~/features/setting/util/likeType';
 import {RootStackParamList} from '~/navigationTypes';
 import {CheckIcon} from '~/components/icon';
+import WithBackFrame from '~/components/common/WithBackFrame';
 
 type EditLikeListProp = RouteProp<RootStackParamList, 'EditLikeList'>;
 

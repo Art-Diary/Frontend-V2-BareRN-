@@ -4,7 +4,6 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 
 import PageFrame from '~/components/PageFrame';
 import * as S from './ExhibitionDetailScreen.style';
-import WithBackFrame from '~/components/WithBackFrame';
 import ExhibitionInfo from '~/components/exhibition/ExhibitionInfo';
 import BottomActionBar from '~/components/exhibition/BottomActionBar';
 import {RootStackParamList} from '~/navigationTypes';
@@ -18,6 +17,7 @@ import {
 } from '~/api/exhibition/likeExh';
 import {useCreateVisitExh} from '~/api/solo/visitExh';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import WithBackFrame from '~/components/common/WithBackFrame';
 
 type ExhibitionDetailRouteProp = RouteProp<
   RootStackParamList,
