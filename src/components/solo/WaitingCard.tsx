@@ -1,10 +1,10 @@
 import React from 'react';
 
 import * as S from './WaitingCard.style';
-import {PersonalTicket} from '~/types/personal';
+import {SoloTicket} from '~/types/solo';
 
 interface Props {
-  data: PersonalTicket;
+  data: SoloTicket;
   onPress: () => void;
 }
 

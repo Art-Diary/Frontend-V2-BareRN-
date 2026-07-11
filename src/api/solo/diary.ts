@@ -1,7 +1,32 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
-import {DiaryAnswer} from '~/types/personal';
+import {DiaryAnswer} from '~/types/solo';
+
+export const soloDiaryKeys = {
+  fetchSoloDiaryList: (visitId: number) =>
+    ['fetchSoloDiaryList', visitId] as const,
+};
+
+const fetchSoloDiaryList = async (visitId: number) => {
+  const token = await AsyncStorage.getItem('accessToken');
+  const res = await axios.get(
+    `${process.env.API_URL}/users/me/visits/${visitId}/diaries`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return res.data.data;
+};
+
+export const useFetchSoloDiaryList = (visitId: number) =>
+  useQuery({
+    queryKey: soloDiaryKeys.fetchSoloDiaryList(visitId),
+    queryFn: () => fetchSoloDiaryList(visitId),
+    staleTime: 500000,
+  });
 
 const createSoloDiary = async (visitId: number, answers: DiaryAnswer[]) => {
   const token = await AsyncStorage.getItem('accessToken');
