@@ -40,7 +40,7 @@ import SplashScreen from './pages/login/SplashScreen';
 import pushNoti from './pushNoti';
 import {linking} from './deeplinkConfig';
 import ExhibitionDetailScreen from './pages/exhibition/ExhibitionDetailScreen';
-import PersonalDetailScreen from './pages/solo/PersonalDetailScreen';
+import SoloDiaryListScreen from './pages/solo/SoloDiaryListScreen';
 import CreateSoloDiaryScreen from './pages/solo/CreateSoloDiaryScreen';
 import QuestionScreen from './pages/solo/QuestionScreen';
 
@@ -182,7 +182,7 @@ export default function App() {
             component={CreateSoloDiaryScreen}
           />
           <Stack.Screen name="Question" component={QuestionScreen} />
-
+          <Stack.Screen name="SoloDiaryList" component={SoloDiaryListScreen} />
           {/* 전시회 */}
           <Stack.Screen
             name="ExhibitionDetail"

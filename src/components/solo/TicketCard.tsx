@@ -3,10 +3,10 @@ import {Image} from 'react-native';
 import {Calendar, MapPin, MoreVertical} from 'lucide-react-native';
 
 import * as S from './TicketCard.style';
-import {PersonalTicket} from '~/types/personal';
+import {SoloTicket} from '~/types/solo';
 
 interface Props {
-  data: PersonalTicket;
+  data: SoloTicket;
   onPress: () => void;
   onMorePress: () => void;
 }

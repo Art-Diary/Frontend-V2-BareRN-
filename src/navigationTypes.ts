@@ -1,5 +1,5 @@
 import {MateInfoType} from './features/together/util/mateInfoType';
-import {DiaryQuestion} from './types/personal';
+import {DiaryQuestion, SoloTicket} from './types/solo';
 
 // types/navigationTypes.ts
 export type RootStackParamList = {
@@ -10,12 +10,14 @@ export type RootStackParamList = {
     params?: {modalOpen?: boolean; fromPushAlarm?: boolean; visitDate?: string};
   };
   // 기록
-  PersonalDetail: undefined;
   CreateSoloDiary: {visitId: number};
   Question: {
     visitId: number;
     index: number;
     questions: DiaryQuestion[];
+  };
+  SoloDiaryList: {
+    ticket: SoloTicket;
   };
   // 전시회
   ExhibitionDetail: {exhId: number};

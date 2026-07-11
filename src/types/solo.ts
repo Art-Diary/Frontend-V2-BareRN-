@@ -1,4 +1,4 @@
-export interface PersonalTicket {
+export interface SoloTicket {
   visitId: number;
   visitDate: string;
   exhId: number;
@@ -16,4 +16,13 @@ export interface DiaryQuestion {
 export interface DiaryAnswer {
   questionId: number;
   answerContent: string;
+}
+
+export interface Diary {
+  soloDiaryId: number;
+  questionId: number;
+  questionContent: string;
+  answerContent: string;
+  writeDate: string;
+  isPublic: boolean;
 }

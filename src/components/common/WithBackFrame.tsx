@@ -71,7 +71,7 @@ const TitleSection = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: ${responsive(15)}px;
+  font-size: ${responsive(16)}px;
   color: ${DARK_GREY};
   font-family: ${FONT_NAME};
 `;
