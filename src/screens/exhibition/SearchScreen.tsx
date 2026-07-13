@@ -10,7 +10,7 @@ import {
   SearchButton,
   EmptyListView,
   EmptyListText,
-} from '~/pages/exhibition/SearchScreen.styles';
+} from '~/screens/exhibition/SearchScreen.styles';
 
 import {Exhibition} from '~/types/exhibition';
 import {useFetchExhibitionList} from '~/api/exhibition/exhibition';

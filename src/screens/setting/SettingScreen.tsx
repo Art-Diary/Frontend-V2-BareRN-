@@ -69,21 +69,21 @@ export default function SettingScreen() {
           </SettingWrapper>
           {/* 설정 */}
           <SettingWrapper>
-            <TitleText>설정</TitleText>
-            <NameTag
+            {/* <TitleText>설정</TitleText> */}
+            {/* <NameTag
               content="좋아요 전시회 목록"
               handleTouch={onPressLikeListButton}
             />
             <NameTag
               content="푸시 알림 설정"
               handleTouch={onPressSettingNotiButton}
-            />
-            <NameTag
+            /> */}
+            {/* <NameTag
               content="Q&A"
               handleTouch={() =>
                 navigation.navigate('QnaList', {isAdmin: false})
               }
-            />
+            /> */}
             {/* {userInfo.authInfo.role === 'ADMIN' && (
               <NameTag
                 content="Q&A (관리자)"
@@ -113,7 +113,7 @@ export default function SettingScreen() {
             <TitleText>회원정보</TitleText>
             <NameTag content="로그아웃" handleTouch={handleLogout} />
             {/* [TODO] */}
-            <NameTag content="탈퇴" handleTouch={onPressLeaveButton} />
+            {/* <NameTag content="탈퇴" handleTouch={onPressLeaveButton} /> */}
           </SettingWrapper>
         </Contents>
       </ScrollView>

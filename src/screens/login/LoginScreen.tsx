@@ -35,7 +35,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (isSuccessLogin) {
-      navigation.navigate('Main', {screen: 'Diary'});
+      navigation.navigate('Main', {screen: 'Solo'});
     }
   }, [isSuccessLogin, isLoginError]);
 
