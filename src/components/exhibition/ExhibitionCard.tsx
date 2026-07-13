@@ -15,7 +15,7 @@ import {
   Title,
   Date,
 } from './ExhibitionCard.styles';
-import CustomTouchable from '../CustomTouchable';
+import CustomTouchable from '../common/CustomTouchable';
 import {
   useCreateLikeExhibition,
   useDeleteLikeExhibition,

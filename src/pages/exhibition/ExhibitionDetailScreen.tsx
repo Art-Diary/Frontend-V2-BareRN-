@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import * as S from './ExhibitionDetailScreen.style';
 import ExhibitionInfo from '~/components/exhibition/ExhibitionInfo';
 import BottomActionBar from '~/components/exhibition/BottomActionBar';

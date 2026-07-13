@@ -2,7 +2,7 @@ import React from 'react';
 import {KeyboardAvoidingView, Platform} from 'react-native';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import WithBackFrame from '~/components/common/WithBackFrame';
 import SoloQuestionCard from '~/components/solo/SoloQuestionCard';
 import SoloDetailFooter from '~/components/solo/SoloDetailFooter';
@@ -59,7 +59,7 @@ const QuestionScreen = () => {
             {
               name: 'Main',
               params: {
-                screen: 'Diary',
+                screen: 'Solo',
               },
             },
           ],

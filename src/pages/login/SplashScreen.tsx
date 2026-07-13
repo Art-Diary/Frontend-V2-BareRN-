@@ -2,11 +2,11 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect} from 'react';
 import styled from 'styled-components/native';
 import {RootStackNavigationProp} from '~/App';
+import {useBootstrap} from '~/components/hook/useBootstrap';
 import {LogoIcon} from '~/components/icon';
 import LoadingModal from '~/components/modal/LoadingModal';
 import responsive from '~/components/util/responsiveSize';
 import {FONT_NAME} from '~/components/util/style';
-import {useBootstrap} from '~/features/login/hooks/useBootstrap';
 
 const SplashScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -15,12 +15,13 @@ const SplashScreen = () => {
   useEffect(() => {
     console.log('IN Splash');
     const bootstrap = async () => {
+      // TODO : 여기가 문제인듯
       const authenticated = await initialize();
 
       console.log('authenticated: ', authenticated);
 
       if (authenticated) {
-        navigation.navigate('Main', {screen: 'Diary'});
+        navigation.navigate('Main', {screen: 'Solo'});
       } else {
         console.log('go to Login');
         navigation.navigate('Login');

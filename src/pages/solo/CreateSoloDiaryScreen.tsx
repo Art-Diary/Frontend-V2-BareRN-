@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '~/navigationTypes';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';

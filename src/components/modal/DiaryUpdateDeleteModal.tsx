@@ -4,7 +4,7 @@ import {BORDER_COLOR, DARK_GREY, MIDDLE_GREY} from '../util/colors';
 import {FONT_NAME} from '../util/style';
 import DecisionModal from './DecisionModal';
 import responsive from '../util/responsiveSize';
-import CustomTouchable from '../CustomTouchable';
+import CustomTouchable from '../common/CustomTouchable';
 import {CloseButtonIcon, PencilUpdateIcon, TrashDeleteIcon} from '../icon';
 
 interface ModalProps {

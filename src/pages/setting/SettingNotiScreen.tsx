@@ -7,7 +7,7 @@ import {FONT_NAME} from '~/components/util/style';
 import UpdateNoti from '~/features/setting/components/UpdateNoti';
 import {NotiInfoType} from '~/features/setting/util/notiType';
 import {useUserInfo} from '~/zustand/userInfo';
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import WithBackFrame from '~/components/common/WithBackFrame';
 
 const SettingNotiScreen = () => {

@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import * as S from './SoloVisitedExhListScreen.style';
 
 import type {SoloTicket} from '~/types/solo';
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import Header from '~/components/common/Header';
 import {useFetchSoloVisitedExhList} from '~/api/solo/visitExh';
 import LoadingModal from '~/components/modal/LoadingModal';

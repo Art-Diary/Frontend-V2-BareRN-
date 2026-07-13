@@ -15,13 +15,13 @@ import {
 import {Exhibition} from '~/types/exhibition';
 import {useFetchExhibitionList} from '~/api/exhibition/exhibition';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import Header from '~/components/common/Header';
 import {Search} from 'lucide-react-native';
 import ExhibitionCard from '~/components/exhibition/ExhibitionCard';
 import LoadingModal from '~/components/modal/LoadingModal';
 import {removeControlCharacter} from '~/components/util/checkKeyword';
-import CustomTouchable from '~/components/CustomTouchable';
+import CustomTouchable from '~/components/common/CustomTouchable';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '~/App';

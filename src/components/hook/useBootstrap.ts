@@ -6,7 +6,7 @@ export const useBootstrap = () => {
   // const setUser = useUserStore(
   //   state => state.setUser,
   // );
-  const {mutate: updateFcmToken} = useUpdateFcmToken();
+  // const {mutate: updateFcmToken} = useUpdateFcmToken();
 
   const initialize = async () => {
     const accessToken = await AsyncStorage.getItem('accessToken');
@@ -22,9 +22,9 @@ export const useBootstrap = () => {
 
       const fcmToken = await notificationService.getToken();
 
-      if (fcmToken) {
-        updateFcmToken(fcmToken);
-      }
+      // if (fcmToken) {
+      //   updateFcmToken(fcmToken);
+      // }
 
       return true;
     } catch {

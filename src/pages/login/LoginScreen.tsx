@@ -8,10 +8,10 @@ import {GoogleLogoIcon, KakaoLogoIcon, LogoIcon} from '~/components/icon';
 import NameTag from '~/components/NameTag';
 import responsive from '~/components/util/responsiveSize';
 import {FONT_NAME} from '~/components/util/style';
-import {handleGoogleLogin} from '~/features/login/util/googleLogin';
-import {handleKakaoLogin} from '~/features/login/util/kakaoLogin';
+import {handleGoogleLogin} from '~/components/util/googleLogin';
+import {handleKakaoLogin} from '~/components/util/kakaoLogin';
 import {useApiErrorToast} from '~/components/hook/useApiErrorToast';
-import {notificationService} from '~/features/login/util/notificationService';
+import {notificationService} from '~/components/util/notificationService';
 
 /**
  * 1. [TODO] 알림 허용 여부 받기

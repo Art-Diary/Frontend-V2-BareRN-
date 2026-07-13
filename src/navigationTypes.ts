@@ -6,7 +6,7 @@ export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
   Main: {
-    screen: 'Setting' | 'Diary' | 'Exhibition' | 'Mate';
+    screen: 'Solo' | 'Search' | 'Gathering' | 'Mate';
     params?: {modalOpen?: boolean; fromPushAlarm?: boolean; visitDate?: string};
   };
   // 기록

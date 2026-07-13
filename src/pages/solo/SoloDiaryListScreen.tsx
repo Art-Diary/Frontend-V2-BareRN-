@@ -8,7 +8,7 @@ import {RootStackParamList} from '~/navigationTypes';
 import DiaryQuestionCard from '~/components/solo/DiaryQuestionCard';
 import {useFetchSoloDiaryList} from '~/api/solo/diary';
 import {Diary} from '~/types/solo';
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import LoadingModal from '~/components/modal/LoadingModal';
 import WithBackFrame from '~/components/common/WithBackFrame';
 

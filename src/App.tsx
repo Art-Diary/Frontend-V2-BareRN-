@@ -24,7 +24,6 @@ import {
 } from 'react-native';
 import VersionCheck from 'react-native-version-check';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import BottomTabs from './BottomTabs';
 import {RootStackParamList} from './navigationTypes';
 import LoginScreen from './pages/login/LoginScreen';
 import MateExhListScreen from './pages/together/MateExhListScreen';
@@ -43,6 +42,7 @@ import ExhibitionDetailScreen from './pages/exhibition/ExhibitionDetailScreen';
 import SoloDiaryListScreen from './pages/solo/SoloDiaryListScreen';
 import CreateSoloDiaryScreen from './pages/solo/CreateSoloDiaryScreen';
 import QuestionScreen from './pages/solo/QuestionScreen';
+import BottomTabNavigator from './components/common/BottomTabNavigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -168,15 +168,11 @@ export default function App() {
         <Stack.Navigator
           initialRouteName={'Splash'}
           screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Main" component={BottomTabNavigator} />
           <Stack.Screen name="Splash" component={SplashScreen} />
           {/* 로그인 회원가입 */}
           <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Main" component={BottomTabs} />
           {/* 기록 */}
-          <Stack.Screen
-            name="PersonalDetail"
-            component={PersonalDetailScreen}
-          />
           <Stack.Screen
             name="CreateSoloDiary"
             component={CreateSoloDiaryScreen}

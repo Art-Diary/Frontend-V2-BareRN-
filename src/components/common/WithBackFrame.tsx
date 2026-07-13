@@ -6,7 +6,7 @@ import {RootStackNavigationProp} from '~/App';
 import {BORDER_COLOR, DARK_GREY} from '../util/colors';
 import {DASH_WIDTH, FONT_NAME} from '../util/style';
 import {ArrowLeft} from 'lucide-react-native';
-import CustomTouchable from '../CustomTouchable';
+import CustomTouchable from './CustomTouchable';
 import responsive from '../util/responsiveSize';
 
 interface BackProps {

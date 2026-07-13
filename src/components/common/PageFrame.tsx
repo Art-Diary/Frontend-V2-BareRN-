@@ -1,9 +1,9 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {BACK_COLOR} from './util/colors';
+import {BACK_COLOR} from '../util/colors';
 import {Dimensions} from 'react-native';
 import {useSafeAreaInsets, SafeAreaView} from 'react-native-safe-area-context';
-import responsive from './util/responsiveSize';
+import responsive from '../util/responsiveSize';
 
 interface Props {
   children?: ReactNode;

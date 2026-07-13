@@ -9,7 +9,7 @@ import {Linking, ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import Header from '~/components/common/Header';
 import NameTag from '~/components/NameTag';
-import PageFrame from '~/components/PageFrame';
+import PageFrame from '~/components/common/PageFrame';
 import {DARK_GREY} from '~/components/util/colors';
 import responsive from '~/components/util/responsiveSize';
 import {showToast} from '~/components/util/showToast';
