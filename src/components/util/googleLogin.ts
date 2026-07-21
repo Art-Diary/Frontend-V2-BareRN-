@@ -1,14 +1,10 @@
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
-import {GOOGLE_ID} from '@env';
 import {SocialLoginType} from './loginType';
 
 export const handleGoogleLogin = async (): Promise<
   SocialLoginType | undefined
 > => {
-  GoogleSignin.configure({
-    webClientId: GOOGLE_ID,
-  });
   await GoogleSignin.hasPlayServices();
   try {
     const userInfo = await GoogleSignin.signIn();

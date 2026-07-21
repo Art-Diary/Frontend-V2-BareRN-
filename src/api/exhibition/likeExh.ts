@@ -1,19 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {InfiniteData, useMutation, useQueryClient} from '@tanstack/react-query';
-import axios from 'axios';
 import {ExhibitionDetail, ExhibitionPage} from '~/types/exhibition';
+import {api} from '~/api';
 
 const createLikeExhibition = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.post(
-    `${process.env.API_URL}/exhibitions/${exhId}/likes`,
-    null,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = await api.post(`/exhibitions/${exhId}/likes`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
   return res.data;
 };
 
@@ -117,14 +113,11 @@ export const useCreateLikeExhibition = () => {
 const deleteLikeExhibition = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
 
-  const res = await axios.delete(
-    `${process.env.API_URL}/exhibitions/${exhId}/likes`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = await api.delete(`/exhibitions/${exhId}/likes`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 
   return res.data;
 };

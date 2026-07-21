@@ -25,24 +25,26 @@ import {
 import VersionCheck from 'react-native-version-check';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {RootStackParamList} from './navigationTypes';
-import LoginScreen from './pages/login/LoginScreen';
-import MateExhListScreen from './pages/together/MateExhListScreen';
-import MateDiaryListScreen from './pages/together/MateDiaryListScreen';
-import GatheringDetailScreen from './pages/together/GatheringDetailScreen';
-import AddGatheringVisitExhScreen from './pages/together/AddGatheringVisitExhScreen';
-import GatheringDiaryScreen from './pages/together/GatheringDiaryScreen';
-import EditProfileScreen from './pages/setting/EditProfileScreen';
-import LikeListScreen from './pages/setting/LikeListScreen';
-import EditLikeListScreen from './pages/setting/EditLikeListScreen';
-import SettingNotiScreen from './pages/setting/SettingNotiScreen';
-import SplashScreen from './pages/login/SplashScreen';
+import LoginScreen from './screens/login/LoginScreen';
+// import EditProfileScreen from './pages/setting/EditProfileScreen';
+// import LikeListScreen from './pages/setting/LikeListScreen';
+// import EditLikeListScreen from './pages/setting/EditLikeListScreen';
+// import SettingNotiScreen from './pages/setting/SettingNotiScreen';
+import SplashScreen from './screens/login/SplashScreen';
 import pushNoti from './pushNoti';
 import {linking} from './deeplinkConfig';
-import ExhibitionDetailScreen from './pages/exhibition/ExhibitionDetailScreen';
-import SoloDiaryListScreen from './pages/solo/SoloDiaryListScreen';
-import CreateSoloDiaryScreen from './pages/solo/CreateSoloDiaryScreen';
-import QuestionScreen from './pages/solo/QuestionScreen';
+import ExhibitionDetailScreen from './screens/exhibition/ExhibitionDetailScreen';
+import SoloDiaryListScreen from './screens/solo/SoloDiaryListScreen';
+import CreateSoloDiaryScreen from './screens/solo/CreateSoloDiaryScreen';
+import QuestionScreen from './screens/solo/QuestionScreen';
 import BottomTabNavigator from './components/common/BottomTabNavigator';
+import GatheringDetailScreen from './screens/gathering/GatheringDetailScreen';
+import GatheringChatScreen from './screens/gathering/GatheringChatScreen';
+import GatheringAddExhibitionStep1Screen from './screens/gathering/GatheringAddExhibitionStep1Screen';
+import GatheringAddExhibitionStep2Screen from './screens/gathering/GatheringAddExhibitionStep2Screen';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {GOOGLE_ID} from '@env';
+import '~/api';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -63,6 +65,10 @@ export default function App() {
     const hasPermissionNoti = await PermissionsAndroid.check(permissionNoti);
 
     const sdkVersion = Number(Platform.Version);
+
+    GoogleSignin.configure({
+      webClientId: GOOGLE_ID,
+    });
 
     if (hasPermissionRead || hasPermissionNoti) {
       return true;
@@ -184,26 +190,25 @@ export default function App() {
             name="ExhibitionDetail"
             component={ExhibitionDetailScreen}
           />
-          {/* 친구/모임 */}
-          <Stack.Screen name="MateExhList" component={MateExhListScreen} />
-          <Stack.Screen name="MateDiaryList" component={MateDiaryListScreen} />
+          {/* 모임 */}
           <Stack.Screen
             name="GatheringDetail"
             component={GatheringDetailScreen}
           />
+          <Stack.Screen name="GatheringChat" component={GatheringChatScreen} />
           <Stack.Screen
-            name="AddGatheringVisitExh"
-            component={AddGatheringVisitExhScreen}
+            name="GatheringAddExhibitionStep1"
+            component={GatheringAddExhibitionStep1Screen}
           />
           <Stack.Screen
-            name="GatheringDiary"
-            component={GatheringDiaryScreen}
+            name="GatheringAddExhibitionStep2"
+            component={GatheringAddExhibitionStep2Screen}
           />
           {/* 설정 */}
-          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+          {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} />
           <Stack.Screen name="LikeList" component={LikeListScreen} />
           <Stack.Screen name="EditLikeList" component={EditLikeListScreen} />
-          <Stack.Screen name="SettingNoti" component={SettingNotiScreen} />
+          <Stack.Screen name="SettingNoti" component={SettingNotiScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

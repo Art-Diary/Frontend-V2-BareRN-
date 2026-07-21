@@ -21,7 +21,7 @@ import {notificationService} from '~/components/util/notificationService';
 const LoginScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const {
-    mutate: userLogin,
+    mutateAsync: userLogin,
     isSuccess: isSuccessLogin,
     isPending: isLoginPending,
     isError: isLoginError,
@@ -49,7 +49,7 @@ const LoginScreen = () => {
     // fcm token
     const fcmToken = await notificationService.getToken();
     // 로그인 요청
-    userLogin({...googleInfo, alarmToken: fcmToken ?? undefined});
+    await userLogin({...googleInfo, alarmToken: fcmToken ?? undefined});
   };
 
   // kakao 로그인
@@ -62,7 +62,7 @@ const LoginScreen = () => {
     // fcm token
     const fcmToken = await notificationService.getToken();
     // 로그인 요청
-    userLogin({...kakaoInfo, alarmToken: fcmToken ?? undefined});
+    await userLogin({...kakaoInfo, alarmToken: fcmToken ?? undefined});
   };
 
   return (

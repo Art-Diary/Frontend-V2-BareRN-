@@ -22,7 +22,7 @@ const BottomTabBar = ({state, navigation}: BottomTabBarProps) => {
         <S.Label active={state.index === 1}>전시회</S.Label>
       </S.TabButton>
 
-      {/* <S.TabButton
+      <S.TabButton
         active={state.index === 2}
         onPress={() => navigation.navigate('Gathering')}>
         <MessageSquare
@@ -31,7 +31,7 @@ const BottomTabBar = ({state, navigation}: BottomTabBarProps) => {
         />
 
         <S.Label active={state.index === 2}>모임</S.Label>
-      </S.TabButton> */}
+      </S.TabButton>
 
       <S.TabButton
         active={state.index === 3}

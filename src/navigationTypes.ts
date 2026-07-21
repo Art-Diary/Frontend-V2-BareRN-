@@ -21,15 +21,14 @@ export type RootStackParamList = {
   };
   // 전시회
   ExhibitionDetail: {exhId: number};
-  // 친구/모임
-  MateExhList: {mateInfo: MateInfoType};
-  MateDiaryList: {mateInfo: MateInfoType; exhId: number};
+  // 모임
   GatheringDetail: {gatheringId: number};
-  AddGatheringVisitExh: {gatheringId: number};
-  GatheringDiary: {gatheringId: number; exhId: number};
+  GatheringChat: {gatheringId: number; visitId: number}; // exhibition?
+  GatheringAddExhibitionStep1: {gatheringId: number};
+  GatheringAddExhibitionStep2: undefined;
   // 설정
   EditProfile: undefined;
   LikeList: undefined;
-  EditLikeList: {likeList: ExhInfo[]};
+  // EditLikeList: {likeList: ExhInfo[]};
   SettingNoti: undefined;
 };

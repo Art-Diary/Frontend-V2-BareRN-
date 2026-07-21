@@ -26,7 +26,7 @@ export default PageFrame;
 /** style */
 const Container = styled.View`
   flex: 1;
-  padding-top: ${responsive(23)}px;
+  padding-top: ${responsive(30)}px;
   background-color: ${BACK_COLOR};
   overflow: hidden;
 `;
