@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation} from '@tanstack/react-query';
-import axios from 'axios';
-import {LoginUserType} from '~/features/login/util/loginType';
+import {LoginUserType} from '~/components/util/loginType';
+import {api} from '~/api';
 
 const loginUser = async (loginInfo: LoginUserType) => {
-  const res = await axios.post(`${process.env.API_URL}/users`, {
+  const res = await api.post(`/users`, {
     ...loginInfo,
   });
   return res.data;
@@ -34,8 +34,8 @@ export const useLoginUser = () => {
 
 const updateFcmToken = async (fcmtoken: string) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.patch(
-    `${process.env.API_URL}/users/alarm-token`,
+  const res = await api.patch(
+    `/users/alarm-token`,
     {alarmToken: fcmtoken},
     {
       headers: {
@@ -55,82 +55,6 @@ export const useUpdateFcmToken = () => {
     },
     onSuccess: async () => {
       console.log('[UpdateFcmToken] success UpdateFcmToken');
-    },
-  });
-};
-
-const uniteSocialLogin = async (loginInfo: LoginUserType) => {
-  const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.post(
-    `${process.env.API_URL}/users/unite`,
-    {...loginInfo},
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  return res.data;
-};
-
-export const useUniteSocialLogin = () => {
-  return useMutation({
-    mutationFn: (loginInfo: LoginUserType) => uniteSocialLogin(loginInfo),
-    onError: err => {
-      console.log(err);
-      console.log('[UniteSocialLogin] error UniteSocialLogin');
-    },
-    onSuccess: async data => {
-      const resData = data;
-      try {
-        await AsyncStorage.setItem('accessToken', resData.accessToken);
-        await AsyncStorage.setItem(
-          'initInfo',
-          JSON.stringify(resData.initInfo),
-        );
-        console.log('[UniteSocialLogin] success UniteSocialLogin');
-      } catch (error) {
-        console.log('[AsyncStorage] Error storing userId', error);
-      }
-      return resData;
-    },
-  });
-};
-
-const separateSocialLogin = async (loginInfo: LoginUserType) => {
-  const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.post(
-    `${process.env.API_URL}/users/separate`,
-    {...loginInfo},
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
-  return res.data;
-};
-
-export const useSeparateSocialLogin = () => {
-  return useMutation({
-    mutationFn: (loginInfo: LoginUserType) => separateSocialLogin(loginInfo),
-    onError: err => {
-      console.log(err);
-      console.log('[SeparateSocialLogin] error SeparateSocialLogin');
-    },
-    onSuccess: async data => {
-      const resData = data;
-      try {
-        await AsyncStorage.setItem('accessToken', resData.accessToken);
-        await AsyncStorage.setItem(
-          'initInfo',
-          JSON.stringify(resData.initInfo),
-        );
-        console.log('[SeparateSocialLogin] success SeparateSocialLogin');
-      } catch (error) {
-        console.log('[AsyncStorage] Error storing userId', error);
-      }
-      return resData;
     },
   });
 };

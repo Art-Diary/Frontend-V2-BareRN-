@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMutation, useQuery} from '@tanstack/react-query';
-import axios from 'axios';
 import {NotiRequestUType} from '~/features/setting/util/notiType';
 import {useUserActions} from '~/zustand/userInfo';
+import {api} from '~/api';
 
 const fetchVerifyNickname = async (nickname: string) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(`${process.env.API_URL}/users/verify`, {
+  const res = await api.get(`/users/verify`, {
     params: {nickname},
     headers: {
       Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export const useFetchVerifyNickname = (nickname: string, state: boolean) =>
 
 const updateUserInfo = async (info: FormData) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.patch(`${process.env.API_URL}/users`, info, {
+  const res = await api.patch(`/users`, info, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
@@ -53,15 +53,11 @@ export const useUpdateUserInfo = () => {
 
 const updateNotiSetting = async (info: NotiRequestUType) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.patch(
-    `${process.env.API_URL}/users/notifications/${info.notiId}`,
-    info,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = await api.patch(`/users/notifications/${info.notiId}`, info, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
   return res.data;
 };
 

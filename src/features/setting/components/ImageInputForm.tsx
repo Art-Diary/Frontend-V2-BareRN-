@@ -8,7 +8,7 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 import {showToast} from '~/components/util/showToast';
-import CustomTouchable from '~/components/CustomTouchable';
+import CustomTouchable from '~/components/common/CustomTouchable';
 import responsive from '~/components/util/responsiveSize';
 import {PencilUpdateNoUnderbarIcon} from '~/components/icon';
 

@@ -1,0 +1,26 @@
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import {SocialLoginType} from './loginType';
+
+export const handleGoogleLogin = async (): Promise<
+  SocialLoginType | undefined
+> => {
+  await GoogleSignin.hasPlayServices();
+  try {
+    const userInfo = await GoogleSignin.signIn();
+    const idToken = userInfo.data?.idToken;
+    const user = userInfo.data?.user;
+    if (idToken && user) {
+      // Firebase Authentication에 Google ID 토큰을 제공하여 사용자를 인증하는 데 사용
+      var googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      await auth().signInWithCredential(googleCredential);
+      return {
+        providerType: 'GOOGLE',
+        providerUserId: user.id,
+      };
+    }
+    return undefined;
+  } catch (error) {
+    return undefined;
+  }
+};

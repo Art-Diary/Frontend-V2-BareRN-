@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
+import {api} from '~/api';
 
 export const exhibitionKeys = {
   exhibitionList: (keyword: string | null, date: string | null) =>
@@ -17,7 +17,7 @@ const fetchExhibitionList = async (
   size: number,
 ) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(`${process.env.API_URL}/exhibitions`, {
+  const res = await api.get(`/exhibitions`, {
     params: {keyword, date, page, size},
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ export const useFetchExhibitionList = (
 
 const fetchExhibitionDetailInfo = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(`${process.env.API_URL}/exhibitions/${exhId}`, {
+  const res = await api.get(`/exhibitions/${exhId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -59,14 +59,11 @@ export const useFetchExhibitionDetailInfo = (exhId: number) =>
 
 const fetchExhibitionReviewListInfo = async (exhId: number) => {
   const token = await AsyncStorage.getItem('accessToken');
-  const res = await axios.get(
-    `${process.env.API_URL}/exhibitions/${exhId}/reviews`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = await api.get(`/exhibitions/${exhId}/reviews`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
   return res.data.data;
 };
 

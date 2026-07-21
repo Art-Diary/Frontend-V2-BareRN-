@@ -10,7 +10,7 @@ import {
 } from '../util/style';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '~/App';
-import CustomTouchable from '../CustomTouchable';
+import CustomTouchable from '../common/CustomTouchable';
 import responsive from '../util/responsiveSize';
 
 interface ErrorModalProps {

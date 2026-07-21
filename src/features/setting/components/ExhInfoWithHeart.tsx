@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import ExhItemView from '../../../components/ExhItemView';
 import {ExhInfo} from '~/features/calendar/util/visitedExhInfoType';
-import CustomTouchable from '~/components/CustomTouchable';
+import CustomTouchable from '~/components/common/CustomTouchable';
 import {EmptyHeartIcon, FullHeartIcon} from '~/components/icon';
 import responsive from '~/components/util/responsiveSize';
 

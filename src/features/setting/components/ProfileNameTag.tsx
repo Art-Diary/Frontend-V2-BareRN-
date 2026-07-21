@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '~/App';
 import React from 'react';
 import styled from 'styled-components/native';
-import CustomTouchable from '~/components/CustomTouchable';
+import CustomTouchable from '~/components/common/CustomTouchable';
 import {PencilUpdateNoUnderbarIcon, ProfileTagIcon} from '~/components/icon';
 import {DARK_GREY, MIDDLE_GREY} from '~/components/util/colors';
 import responsive from '~/components/util/responsiveSize';

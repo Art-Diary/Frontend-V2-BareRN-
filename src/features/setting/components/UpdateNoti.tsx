@@ -4,7 +4,7 @@ import {useUserActions} from '~/zustand/userInfo';
 import {useUpdateNotiSetting} from '~/api/auth/userInfo';
 import {showToast} from '~/components/util/showToast';
 import LoadingModal from '~/components/modal/LoadingModal';
-import CustomTouchable from '~/components/CustomTouchable';
+import CustomTouchable from '~/components/common/CustomTouchable';
 import {PrivateToggleIcon, PublicToggleIcon} from '~/components/icon';
 
 interface Props {
