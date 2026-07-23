@@ -4,8 +4,8 @@ import {api} from '~/api';
 
 export const gatheringKeys = {
   fetchGatheringList: () => ['fetchGatheringList'] as const,
-  // fetchGatheringDetailInfo: (gatheringId: number) =>
-  //   ['fetchGatheringDetailInfo', gatheringId] as const
+  fetchGatheringDetailInfo: (gatheringId: number) =>
+    ['fetchGatheringDetailInfo', gatheringId] as const,
 };
 
 const fetchGatheringList = async () => {
@@ -89,69 +89,67 @@ export const useJoinGathering = () => {
   });
 };
 
-// const fetchGatheringDetailInfo = async (gatheringId: number) => {
-//   const token = await AsyncStorage.getItem('accessToken');
-//   const res = await axios.get(
-//     `${process.env.API_URL}/gatherings/${gatheringId}`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//   );
-//   return res.data;
-// };
+const fetchGatheringDetailInfo = async (gatheringId: number) => {
+  const token = await AsyncStorage.getItem('accessToken');
+  const res = await api.get(`/gatherings/${gatheringId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data.data;
+};
 
-// export const useFetchGatheringDetailInfo = (gatheringId: number) =>
-//   useQuery({
-//     queryKey: gatheringKeys.fetchGatheringDetailInfo(gatheringId),
-//     queryFn: () => fetchGatheringDetailInfo(gatheringId),
-//     staleTime: 500000,
-//   });
+export const useFetchGatheringDetailInfo = (gatheringId: number) =>
+  useQuery({
+    queryKey: gatheringKeys.fetchGatheringDetailInfo(gatheringId),
+    queryFn: () => fetchGatheringDetailInfo(gatheringId),
+    staleTime: 500000,
+  });
 
-// const createGatheringVisitExh = async (info: GatheringVisitExhCReqType) => {
-//   const token = await AsyncStorage.getItem('accessToken');
-//   const res = await axios.post(
-//     `${process.env.API_URL}/gatherings/${info.gatheringId}/exh-visits`,
-//     {exhId: info.exhId, visitDate: info.visitDate},
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//   );
-//   return res.data;
-// };
+const createGatheringVisitedExh = async (
+  gatheringId: number,
+  exhId: number,
+  visitDate: string,
+) => {
+  const token = await AsyncStorage.getItem('accessToken');
+  const res = await api.post(
+    `/gatherings/${gatheringId}/visits`,
+    {exhId: exhId, visitDate: visitDate},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return res.data;
+};
 
-// export const useCreateGatheringVisitExh = (
-//   gatheringId: number,
-//   date: string,
-// ) => {
-//   const queryClient = useQueryClient();
+export const useCreateGatheringVisitedExh = () => {
+  const queryClient = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: (info: GatheringVisitExhCReqType) =>
-//       createGatheringVisitExh(info),
-//     onError: err => {
-//       console.log(err);
-//       console.log(
-//         '[CreateGatheringVisitExh] error create CreateGatheringVisitExh',
-//       );
-//     },
-//     onSuccess: async (data, variables) => {
-//       console.log(
-//         '[CreateGatheringVisitExh] success create CreateGatheringVisitExh',
-//       );
-//       queryClient.invalidateQueries({
-//         queryKey: gatheringKeys.fetchGatheringVisitDateList(
-//           gatheringId,
-//           Number(date.split('.')[0]),
-//           Number(date.split('.')[1]),
-//         ),
-//       });
-//       queryClient.invalidateQueries({
-//         queryKey: gatheringKeys.fetchGatheringDetailInfo(gatheringId),
-//       });
-//     },
-//   });
-// };
+  return useMutation({
+    mutationFn: ({
+      gatheringId,
+      exhId,
+      visitDate,
+    }: {
+      gatheringId: number;
+      exhId: number;
+      visitDate: string;
+    }) => createGatheringVisitedExh(gatheringId, exhId, visitDate),
+    onError: err => {
+      console.log(err);
+      console.log(
+        '[CreateGatheringVisitedExh] error create CreateGatheringVisitedExh',
+      );
+    },
+    onSuccess: async (data, variables) => {
+      console.log(
+        '[CreateGatheringVisitedExh] success create CreateGatheringVisitedExh',
+      );
+      queryClient.invalidateQueries({
+        queryKey: ['fetchGatheringDetailInfo', variables.gatheringId],
+      });
+    },
+  });
+};

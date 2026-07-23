@@ -15,7 +15,7 @@ const SettingNotiScreen = () => {
 
   return (
     <PageFrame>
-      <WithBackFrame title="푸시 알림 설정" line={true} />
+      <WithBackFrame title="푸시 알림 설정" />
 
       {/* body */}
       <Content>

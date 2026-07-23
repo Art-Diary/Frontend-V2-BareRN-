@@ -3,15 +3,7 @@ import styled from 'styled-components/native';
 import responsive from '~/components/util/responsiveSize';
 import {FONT_NAME} from '~/components/util/style';
 
-export const IconButton = styled.Pressable`
-  width: ${responsive(31)}px;
-  height: ${responsive(31)}px;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: ${responsive(999)}px;
-`;
+export const IconButton = styled.Pressable``;
 
 export const Scroll = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,

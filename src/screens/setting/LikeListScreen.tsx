@@ -33,7 +33,7 @@ const LikeListScreen = () => {
   return (
     <PageFrame>
       <LoadingModal isLoading={isLoading} />
-      <WithBackFrame title="좋아요 전시회" line={true}>
+      <WithBackFrame title="좋아요 전시회">
         <CustomTouchable onPress={onPressEditButton}>
           <PencilUpdateNoUnderbarIcon customHeight={15} />
         </CustomTouchable>

@@ -89,10 +89,7 @@ const QuestionScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <LoadingModal isLoading={isPending} />
       <PageFrame>
-        <WithBackFrame
-          title={`일기 적기 (${index + 1}/${questions.length})`}
-          line={false}
-        />
+        <WithBackFrame title={`일기 적기 (${index + 1}/${questions.length})`} />
 
         <S.Content>
           <SoloQuestionCard

@@ -64,7 +64,7 @@ const EditLikeListScreen: React.FC<Props> = ({route}) => {
   return (
     <PageFrame>
       <LoadingModal isLoading={isPending} />
-      <WithBackFrame title="좋아요 전시회" line={true}>
+      <WithBackFrame title="좋아요 전시회">
         <CustomTouchable onPress={onPressComplete}>
           <CheckIcon />
         </CustomTouchable>
