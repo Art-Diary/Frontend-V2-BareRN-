@@ -1,4 +1,4 @@
-import {MateInfoType} from './features/together/util/mateInfoType';
+import {Exhibition} from './types/exhibition';
 import {DiaryQuestion, SoloTicket} from './types/solo';
 
 // types/navigationTypes.ts
@@ -25,7 +25,7 @@ export type RootStackParamList = {
   GatheringDetail: {gatheringId: number};
   GatheringChat: {gatheringId: number; visitId: number}; // exhibition?
   GatheringAddExhibitionStep1: {gatheringId: number};
-  GatheringAddExhibitionStep2: undefined;
+  GatheringAddExhibitionStep2: {gatheringId: number; exhibition: Exhibition};
   // 설정
   EditProfile: undefined;
   LikeList: undefined;

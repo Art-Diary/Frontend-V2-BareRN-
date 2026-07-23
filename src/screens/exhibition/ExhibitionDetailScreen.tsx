@@ -81,7 +81,7 @@ export default function ExhibitionDetailScreen() {
   if (isError || !exhibition) {
     return (
       <PageFrame>
-        <WithBackFrame title="전시 상세 정보" line={false} />
+        <WithBackFrame title="전시 상세 정보" />
       </PageFrame>
     );
   }
@@ -91,7 +91,7 @@ export default function ExhibitionDetailScreen() {
       <LoadingModal isLoading={isPending} />
       {/* Header */}
 
-      <WithBackFrame title={'전시 상세 정보'} line={false} />
+      <WithBackFrame title={'전시 상세 정보'} />
 
       <ScrollView
         showsVerticalScrollIndicator={false}

@@ -4,18 +4,17 @@ import {BackHandler} from 'react-native';
 import styled from 'styled-components/native';
 import {RootStackNavigationProp} from '~/App';
 import {BORDER_COLOR, DARK_GREY} from '../util/colors';
-import {DASH_WIDTH, FONT_NAME} from '../util/style';
+import {FONT_NAME} from '../util/style';
 import {ArrowLeft} from 'lucide-react-native';
 import CustomTouchable from './CustomTouchable';
 import responsive from '../util/responsiveSize';
 
 interface BackProps {
   title?: string;
-  line: boolean;
   children?: ReactNode;
 }
 
-const WithBackFrame: React.FC<BackProps> = ({title, line, children}) => {
+const WithBackFrame: React.FC<BackProps> = ({title, children}) => {
   const navigation = useNavigation<RootStackNavigationProp>();
   const handlePressBack = useCallback(() => {
     if (navigation?.canGoBack?.()) {
@@ -34,7 +33,7 @@ const WithBackFrame: React.FC<BackProps> = ({title, line, children}) => {
   }, [handlePressBack]);
 
   return (
-    <Container line={line}>
+    <Container>
       <CustomTouchable onPress={handlePressBack}>
         <ArrowLeft size={20} color="#8BA1B0" />
       </CustomTouchable>
@@ -50,19 +49,14 @@ const WithBackFrame: React.FC<BackProps> = ({title, line, children}) => {
 export default WithBackFrame;
 
 /** style */
-interface ContainerProps {
-  line: boolean;
-}
-
-const Container = styled.View<ContainerProps>`
+const Container = styled.View`
   flex-direction: row;
   align-items: center;
   padding: ${responsive(10)}px ${responsive(15)}px;
   width: 100%;
-  border-style: ${(props: ContainerProps) => (props.line ? `dashed` : `none`)};
   border-color: ${BORDER_COLOR};
-  border-bottom-width: ${(props: ContainerProps) =>
-    props.line ? `${DASH_WIDTH}` : `0`}px;
+  margin-top: ${responsive(1)}px;
+  margin-bottom: ${responsive(5)}px;
 `;
 
 const TitleSection = styled.View`

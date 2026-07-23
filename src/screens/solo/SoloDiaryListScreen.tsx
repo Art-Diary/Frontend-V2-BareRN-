@@ -24,8 +24,6 @@ const SoloDiaryListScreen = () => {
 
   const diaryList = data ?? [];
 
-  console.log('diaryList:', diaryList);
-
   if (isLoading) {
     return (
       <PageFrame>
@@ -37,14 +35,14 @@ const SoloDiaryListScreen = () => {
   if (isError) {
     return (
       <PageFrame>
-        <WithBackFrame title="기록" line={false} />
+        <WithBackFrame title="기록" />
       </PageFrame>
     );
   }
 
   return (
     <PageFrame>
-      <WithBackFrame title={'기록'} line={false}>
+      <WithBackFrame title={'기록'}>
         <S.IconButton>
           <MoreVertical size={20} color="#8BA1B0" />
         </S.IconButton>

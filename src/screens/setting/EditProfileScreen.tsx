@@ -95,7 +95,7 @@ const EditProfileScreen = () => {
 
   return (
     <PageFrame>
-      <WithBackFrame title="" line={true} />
+      <WithBackFrame title="" />
       <LoadingModal isLoading={isPending} />
 
       {/* body */}
